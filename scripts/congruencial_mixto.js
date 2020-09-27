@@ -18,11 +18,11 @@ function congruencialMixto(semilla, a, c, m, n){
     
     if(Number.isInteger(semilla) && Number.isInteger(a) && Number.isInteger(c) && Number.isInteger(m) && Number.isInteger(n)){
         codigo = 200;
-        
+
         cDivisores = getDivisores(c);
         mDivisores = getDivisores(m);
-        for(cDivisor in cDivisores){  //Checa si c y m tienen divisores comunes mayores a 1
-            if(mDivisores.includes(cDivisor)){
+        for(i = 0; i < cDivisores.length; i++){  //Checa si c y m tienen divisores comunes mayores a 1
+            if(mDivisores.includes(cDivisores[i])){
                 tienePeriodo = false;
                 break;
             }
@@ -30,8 +30,8 @@ function congruencialMixto(semilla, a, c, m, n){
 
         if(tienePeriodo){
             divisoresPrimos = getDivisoresPrimos(m);
-            for(divisor in divisoresPrimos){
-                if((a-1) % divisor != 0){
+            for(i = 0; i < divisoresPrimos.length; i++){
+                if((a-1) % divisoresPrimos[i] != 0){
                     tienePeriodo = false;
                     break;
                 }
@@ -41,12 +41,12 @@ function congruencialMixto(semilla, a, c, m, n){
         if(m % 4 == 0 && (a-1) % 4 != 0) tienePeriodo = false;
 
         for(i = 0; i < n; i++){
-            nuevoNumero = (listaNumeros[n] * a + c) % m;
+            nuevoNumero = (listaNumeros[i] * a + c) % m;
             listaNumeros.push(nuevoNumero)
         }
 
-        for(numero in listaNumeros){
-            numerosRi.push(numero/m);
+        for(i = 0; i < listaNumeros.length; i++){
+            numerosRi.push(listaNumeros[i]/m);
         }
     }
 
@@ -61,24 +61,24 @@ function congruencialMixto(semilla, a, c, m, n){
 La función getDivisores toma como argumento un número natural y regresa un arreglo con todos sus divisores. NOTA: eficiencia O(n)
 */
 function getDivisores(n){
-    resultado = []
-    for(i = 2; i <= n; i++) if(n % i == 0) resultado.push(i);
-    return resultado;
+    resDivisores = []
+    for(i = 2; i <= n; i++) if(n % i == 0) resDivisores.push(i);
+    return resDivisores;
 }
 
 /*
 La función getDivisoresPrimos toma como argumento un número natural y regresa un arreglo con todos sus divisores primos
 */
 function getDivisoresPrimos(n){
-    resultado = []
-    for(i = 2; i <= n; i++) if(n % i == 0 && esPrimo(i)) resultado.push(i);
-    return resultado;
+    resPrimos = []
+    for(i = 2; i <= n; i++) if(n % i == 0 && esPrimo(i)) resPrimos.push(i);
+    return resPrimos;
 }
 
 /*
 La función esPrimo toma como argumento un número natural y regresa un booleano que indica si es primo (true) o no (false)
 */
 function esPrimo(n){
-    for(var i = 2; i < num; i++) if(num % i == 0) return false;
-    return num > 1;
+    for(var i = 2; i < n; i++) if(n % i == 0) return false;
+    return n > 1;
 }
