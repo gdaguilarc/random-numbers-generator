@@ -9,7 +9,7 @@ class MidSquare extends Generator implements RandomGenerator {
     const seen: Set<number> = new Set();
     const fullLength: number = 8;
 
-    let ans: number = 0;
+    let ans: number = this.seed;
     let counter: number = 0;
 
     while (counter < this.iterations && !seen.has(ans)) {

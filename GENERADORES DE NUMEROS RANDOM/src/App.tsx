@@ -5,13 +5,16 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import "./App.css";
 
 import HomePage from "./components/HomePage";
+import MidSquare from "./components/MidSquare";
+import AnimatedSwitch from "./components/AnimatedSwitch";
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
+      <AnimatedSwitch>
         <Route exact path="/" component={HomePage} />
-      </Switch>
+        <Route exact path="/midsquare" component={MidSquare} />
+      </AnimatedSwitch>
       <Route exact path="/" render={redirectToHome} />
     </BrowserRouter>
   );
