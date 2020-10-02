@@ -15,7 +15,9 @@ class MidSquare extends Generator implements RandomGenerator {
     while (counter < this.iterations && !seen.has(ans)) {
       counter += 1;
       seen.add(ans);
-      ans = parseInt((ans * ans).toString().padStart(fullLength, "0"));
+      ans = parseInt(
+        (ans * ans).toString().padStart(fullLength, "0").substring(2, 6)
+      );
     }
 
     return ans;
