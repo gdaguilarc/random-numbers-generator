@@ -2,8 +2,11 @@ import Generator from "./Generator";
 import RandomGenerator from "../Interfaces/RandomGenerator";
 
 class MidSquare extends Generator implements RandomGenerator {
+  seen: number[];
+
   constructor(seed: number = 2372, iterations: number = 20) {
     super(seed, iterations);
+    this.seen = [];
   }
   generate(): number {
     const seen: Set<number> = new Set();
@@ -20,6 +23,7 @@ class MidSquare extends Generator implements RandomGenerator {
       );
     }
 
+    this.seen = Array.from(seen);
     return ans;
   }
 }
