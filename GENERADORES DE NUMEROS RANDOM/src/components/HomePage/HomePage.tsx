@@ -3,10 +3,10 @@ import { History } from "history";
 import { useCallback } from "react";
 
 import {
-  makeStyles,
-  createStyles,
-  Theme,
-  useTheme,
+	makeStyles,
+	createStyles,
+	Theme,
+	useTheme,
 } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
@@ -15,73 +15,120 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.primary.main,
-      minHeight: "100vh",
-      color: theme.palette.common.white,
-      flexFlow: "1",
-    },
-    container: {
-      padding: theme.spacing(2),
-    },
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    cards: {
-      padding: theme.spacing(4),
-      color: theme.palette.text.secondary,
-      borderRadius: "30px",
-    },
-    content: {
-      paddingTop: "2%",
-    },
-  })
+	createStyles({
+		root: {
+			backgroundColor: theme.palette.primary.light,
+			minHeight: "100vh",
+			color: theme.palette.primary.dark,
+			flexFlow: "1",
+		},
+		container: {
+			padding: theme.spacing(2),
+		},
+		text: {
+			fontFamily: "Montserrat-Bold",
+		},
+		cards: {
+			padding: theme.spacing(4),
+			color: theme.palette.text.secondary,
+			borderRadius: "0.3px",
+			boxShadow: "7px 7px rgba(155, 167, 192, .8)",
+			border: "3px solid #8b96ac",
+			minHeight: "200px",
+			maxHeight: "500px",
+		},
+		darkcard: {
+			backgroundColor: theme.palette.primary.dark,
+		},
+		header: {
+			fontWeight: "bold",
+			textAlign: "center",
+		},
+		section2: {
+			margin: theme.spacing(2),
+		},
+		content: {
+			paddingTop: "2%",
+		},
+		section3: {
+			margin: theme.spacing(1, 1, 1),
+		},
+	})
 );
 
 interface HomePageProps {
-  history: History;
+	history: History;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ history }) => {
-  const classes = useStyles();
-  const theme = useTheme();
+	const classes = useStyles();
+	const theme = useTheme();
 
-  const navToMidSquare = useCallback(() => {
-    history.push(`midsquare`);
-  }, [history]);
+	const navToMidSquare = useCallback(() => {
+		history.push(`midsquare`);
+	}, [history]);
 
-  return (
-    <Box className={classes.root}>
-      <Container maxWidth="xl">
-        <div className={classes.container}>
-          <Typography variant="h4" className={classes.text}>
-            SIMULADOR DE NUMEROS RANDOM
-          </Typography>
-        </div>
-        <Box className={classes.content}>
-          <Grid container spacing={3}>
-            <Grid item xl={6} lg={6} md={6} sm={6}>
-              <CardActionArea onClick={navToMidSquare.bind(null)}>
-                <Card className={classes.cards}>
-                  <Typography component="h5" variant="h5">
-                    Método de los Centros Cuadrados
-                  </Typography>
+	return (
+		<Box className={classes.root}>
+			<Container maxWidth='xl'>
+				<div className={classes.container}>
+					<Typography variant='h4' className={classes.text} align='center'>
+						SIMULADOR DE NUMEROS RANDOM
+					</Typography>
+				</div>
 
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Es un algoritmo no congruencial que fue propuesto en los
-                    años cuarenta del siglo XX por Von Neumann y Metrópolis.
-                  </Typography>
-                </Card>
-              </CardActionArea>
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
-    </Box>
-  );
+				<Box className={classes.content}>
+					<Grid container spacing={5}>
+						{/* metodo centros cuadrados */}
+						<Grid item xl={4} lg={4} md={6} sm={12}>
+							<CardActionArea onClick={navToMidSquare.bind(null)}>
+								<Card className={classes.cards}>
+									<Typography className={classes.header} variant='h5'>
+										Método de los Centros Cuadrados
+									</Typography>
+									<Divider className={classes.section2} />
+									<Typography
+										variant='subtitle1'
+										color='textSecondary'
+										align='justify'
+										className={classes.section2}
+									>
+										Es un algoritmo no congruencial que fue propuesto en los
+										años cuarenta del siglo XX por Von Neumann y Metrópolis.
+									</Typography>
+								</Card>
+							</CardActionArea>
+						</Grid>
+						{/* generador multiplicativo */}
+						<Grid item xl={4} lg={4} md={6} sm={12}>
+							<CardActionArea onClick={navToMidSquare.bind(null)}>
+								<Card className={classes.cards}>
+									<Typography className={classes.header} variant='h5'>
+										Generador Multiplicativo
+									</Typography>
+									<Divider className={classes.section2} />
+									<Typography
+										variant='subtitle1'
+										color='textSecondary'
+										align='justify'
+										className={classes.section2}
+									>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+										do eiusmod tempor incididunt ut labore et dolore magna
+										aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+										ullamco laboris n
+									</Typography>
+								</Card>
+							</CardActionArea>
+						</Grid>
+					</Grid>
+				</Box>
+			</Container>
+		</Box>
+	);
 };
 
 export default HomePage;
