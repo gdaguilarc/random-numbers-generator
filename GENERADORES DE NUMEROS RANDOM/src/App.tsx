@@ -11,10 +11,10 @@ import AnimatedSwitch from "./components/AnimatedSwitch";
 function App() {
   return (
     <BrowserRouter>
-      <AnimatedSwitch>
+      <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/midsquare" component={MidSquare} />
-      </AnimatedSwitch>
+      </Switch>
       <Route exact path="/" render={redirectToHome} />
     </BrowserRouter>
   );
