@@ -69,7 +69,11 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 
 	const navToMidSquare = useCallback(() => {
 		history.push(`midsquare`);
-	}, [history]);
+  }, [history]);
+  
+  const navToLinCong = useCallback(() => {
+    history.push(`lincong`)
+  }, [history])
 
 	return (
 		<Box className={classes.root}>
@@ -120,6 +124,25 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 										do eiusmod tempor incididunt ut labore et dolore magna
 										aliqua. Ut enim ad minim veniam, quis nostrud exercitation
 										ullamco laboris n
+									</Typography>
+								</Card>
+							</CardActionArea>
+						</Grid>
+            {/* Método de Congruencia Lineal */}
+						<Grid item xl={4} lg={4} md={6} sm={12}>
+							<CardActionArea onClick={navToLinCong.bind(null)}>
+								<Card className={classes.cards}>
+									<Typography className={classes.header} variant='h5'>
+										Método de Congruencia Lineal
+									</Typography>
+									<Divider className={classes.section2} />
+									<Typography
+										variant='subtitle1'
+										color='textSecondary'
+										align='justify'
+										className={classes.section2}
+									>
+										Fue propuesto por Lehmer en el año de 1951.
 									</Typography>
 								</Card>
 							</CardActionArea>
