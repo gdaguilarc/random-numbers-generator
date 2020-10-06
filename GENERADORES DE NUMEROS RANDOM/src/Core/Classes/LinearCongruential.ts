@@ -97,7 +97,7 @@ class LinearCongruentialMethod extends Generator implements LinearCongruential, 
 
     getPrimeDivisors(n: number): number[]{
         let resPrimes: number[] = []
-        for(let i = 2; i <= n; i++) if(n % i == 0 && esPrimo(i)) resPrimes.push(i);
+        for(let i = 2; i <= n; i++) if(n % i == 0 && this.isPrime(i)) resPrimes.push(i);
         return resPrimes;
     }
 
