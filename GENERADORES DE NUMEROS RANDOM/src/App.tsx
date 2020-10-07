@@ -11,19 +11,19 @@ import LinearCongruential from "./components/LinearCongruential";
 import Mutiplicative from "./components/Multiplicative";
 
 function App() {
-	return (
-		<BrowserRouter>
-			<Switch>
-				<Route exact path='/' component={HomePage} />
-				<Route exact path='/midsquare' component={MidSquare} />
-				<Route exact path='/lincong' component={LinearCongruential} />
-				<Route exact path='/mutiplicative' component={Mutiplicative} />
-			</Switch>
-			<Route exact path='/' render={redirectToHome} />
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/midsquare" component={MidSquare} />
+        <Route exact path="/lincong" component={LinearCongruential} />
+        <Route exact path="/multiplicative" component={Mutiplicative} />
+      </Switch>
+      <Route exact path="/" render={redirectToHome} />
+    </BrowserRouter>
+  );
 }
 
-const redirectToHome = () => <Redirect to='/' />;
+const redirectToHome = () => <Redirect to="/" />;
 
 export default App;
