@@ -69,11 +69,15 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 
 	const navToMidSquare = useCallback(() => {
 		history.push(`midsquare`);
-  }, [history]);
-  
-  const navToLinCong = useCallback(() => {
-    history.push(`lincong`)
-  }, [history])
+	}, [history]);
+
+	const navToLinCong = useCallback(() => {
+		history.push(`lincong`);
+	}, [history]);
+
+	const navToMultiplicative = useCallback(() => {
+		history.push(`multiplicative`);
+	}, [history]);
 
 	return (
 		<Box className={classes.root}>
@@ -108,7 +112,7 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 						</Grid>
 						{/* generador multiplicativo */}
 						<Grid item xl={4} lg={4} md={6} sm={12}>
-							<CardActionArea onClick={navToMidSquare.bind(null)}>
+							<CardActionArea onClick={navToMultiplicative.bind(null)}>
 								<Card className={classes.cards}>
 									<Typography className={classes.header} variant='h5'>
 										Generador Multiplicativo
@@ -128,7 +132,7 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 								</Card>
 							</CardActionArea>
 						</Grid>
-            {/* Método de Congruencia Lineal */}
+						{/* Método de Congruencia Lineal */}
 						<Grid item xl={4} lg={4} md={6} sm={12}>
 							<CardActionArea onClick={navToLinCong.bind(null)}>
 								<Card className={classes.cards}>
