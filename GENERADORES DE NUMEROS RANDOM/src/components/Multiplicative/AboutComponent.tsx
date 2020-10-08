@@ -40,7 +40,7 @@ const AboutComponent: React.FC = () => {
 			<Grid container spacing={3}>
 				<Grid item sm={12}>
 					<Typography variant='h5' className={classes.header}>
-						Método de los Centros Cuadrados
+						Método Congruencial Multiplicativo
 					</Typography>
 				</Grid>
 				<Grid item sm={12} md={12}>
@@ -49,14 +49,14 @@ const AboutComponent: React.FC = () => {
 						color='textSecondary'
 						className={classes.section2}
 					>
-						Es un algoritmo no congruencial que fue propuesto en los años
-						cuarenta del siglo XX por Von Neumann y Metrópolis.
+						El método congruencial multiplicativo (método de Lehmer) es un tipo
+						de generador congruencial lineal.
 					</Typography>
 				</Grid>
 				<Grid item sm={12} lg={12} className={classes.imageCentered}>
 					<Grid container spacing={1}>
 						<Grid item sm={12}>
-							<img src='./img/john_von_neumann.jpg' width='150px' />
+							<img src='./img/Lehmer.jpg' width='150px' alt='' />
 						</Grid>
 						<Grid item sm={12}>
 							<Typography
@@ -76,12 +76,9 @@ const AboutComponent: React.FC = () => {
 						color='textSecondary'
 						className={classes.section2}
 					>
-						En matemáticas, el método del cuadrado medio es un método para
-						generar números pseudoaleatorios. En la práctica no es un buen
-						método, ya que su período suele ser muy corto y tiene algunas
-						debilidades severas; repetido lo suficiente, el método del cuadrado
-						medio comenzará a generar repetidamente el mismo número o pasará a
-						un número anterior en la secuencia y se repetirá indefinidamente.
+						En matemáticas, el método congruencial multiplicativo es un método
+						para para generar números pseudo aleatorios. Tiene como base al
+						algoritmo congruencia lineal pero conlleva una operación menos.
 					</Typography>
 				</Grid>
 			</Grid>

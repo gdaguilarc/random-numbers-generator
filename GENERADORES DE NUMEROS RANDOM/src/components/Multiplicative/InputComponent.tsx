@@ -51,19 +51,27 @@ const recalculateRandNumber = (seed: number, iterations: number) => {
 
 interface InputComponentProps {
 	error: string;
+	multiplierA: number;
+	modulus: number;
 	seed: number;
 	iterations: number;
 	onSeedChange({ target }: any): void;
 	onIterationsChange(event: any, newValue: number | number[]): void;
+	handleModulusChange: (event: any) => void;
+	handleMultiChange: (event: any) => void;
 	setRand(a: number): void;
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
 	error,
 	seed,
+	multiplierA,
+	modulus,
 	iterations,
 	onSeedChange,
 	onIterationsChange,
+	handleModulusChange,
+	handleMultiChange,
 	setRand,
 }) => {
 	const classes = useStyles();
@@ -88,6 +96,25 @@ const InputComponent: React.FC<InputComponentProps> = ({
 					value={seed}
 					onChange={onSeedChange}
 				/>
+				<br />
+				<TextField
+					id='outlined-basic'
+					label='Multiplicador'
+					variant='outlined'
+					size='small'
+					value={multiplierA}
+					onChange={(e) => handleMultiChange(e)}
+				/>
+				<br />
+				<TextField
+					id='outlined-basic'
+					label='Módulo'
+					variant='outlined'
+					size='small'
+					value={modulus}
+					onChange={(e) => handleModulusChange(e)}
+				/>
+				<br />
 
 				<Slider
 					value={iterations}
