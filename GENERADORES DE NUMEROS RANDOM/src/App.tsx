@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { HashRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import "./App.css";
 
@@ -11,7 +11,7 @@ import Mutiplicative from "./components/Multiplicative";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/midsquare" component={MidSquare} />
@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/multiplicative" component={Mutiplicative} />
       </Switch>
       <Route exact path="/" render={redirectToHome} />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
