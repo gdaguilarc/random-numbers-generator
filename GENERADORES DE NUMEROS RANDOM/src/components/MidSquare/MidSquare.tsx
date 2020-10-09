@@ -14,6 +14,7 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import HistoryList from "./HistoryList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,11 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       paddingTop: theme.spacing(3),
-    },
-    cards: {
-      padding: theme.spacing(4),
-      color: theme.palette.text.secondary,
-      borderRadius: "30px",
     },
     center: {
       textAlign: "center",
@@ -81,7 +77,14 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
         </Typography>
         <Box className={classes.content}>
           <Grid container spacing={3}>
-            <Grid item xl={6} lg={6} md={12} sm={12}>
+            <Grid item xl={3} lg={3} md={12} sm={12}>
+              <Grid container spacing={3}>
+                <Grid item xl={12} lg={12} md={12} sm={12}>
+                  <AboutComponent />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xl={4} lg={4} md={6} sm={12}>
               <Grid container spacing={3}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <InputComponent
@@ -98,10 +101,10 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xl={6} lg={6} md={12} sm={12}>
+            <Grid item xl={4} lg={4} md={6} sm={12}>
               <Grid container spacing={3}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
-                  <AboutComponent />
+                  <HistoryList seed={seed} iterations={iterations} />
                 </Grid>
               </Grid>
             </Grid>
