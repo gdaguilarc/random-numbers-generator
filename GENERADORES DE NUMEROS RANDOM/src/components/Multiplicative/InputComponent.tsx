@@ -55,24 +55,29 @@ interface InputComponentProps {
 	modulus: number;
 	seed: number;
 	iterations: number;
-	onSeedChange({ target }: any): void;
-	onIterationsChange(event: any, newValue: number | number[]): void;
-	handleModulusChange: (event: any) => void;
+	handleSeedChange: (event: any) => void;
 	handleMultiChange: (event: any) => void;
-	setRand(a: number): void;
+	handleModulusChange: (event: any) => void;
+	handleItersChange: (event: any, newValue: number | number[]) => void;
+	recalculateRandNumber: (
+		multiplierA: number,
+		modulus: number,
+		seed: number,
+		iterations: number
+	) => void;
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
 	error,
-	seed,
 	multiplierA,
 	modulus,
+	seed,
 	iterations,
-	onSeedChange,
-	onIterationsChange,
-	handleModulusChange,
+	handleSeedChange,
 	handleMultiChange,
-	setRand,
+	handleModulusChange,
+	handleItersChange,
+	recalculateRandNumber,
 }) => {
 	const classes = useStyles();
 	return (
@@ -90,11 +95,9 @@ const InputComponent: React.FC<InputComponentProps> = ({
 					id='outlined-basic'
 					label='Semilla'
 					variant='outlined'
-					defaultValue='0'
 					size='small'
-					inputProps={{ maxLength: 4 }}
 					value={seed}
-					onChange={onSeedChange}
+					onChange={(e) => handleSeedChange(e)}
 				/>
 				<br />
 				<TextField
@@ -120,7 +123,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
 					value={iterations}
 					step={1}
 					valueLabelDisplay='auto'
-					onChange={onIterationsChange}
+					onChange={handleItersChange}
 				/>
 
 				<Button
@@ -129,8 +132,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
 					size='large'
 					style={{ color: "white" }}
 					onClick={() => {
-						const value: number = recalculateRandNumber(seed, iterations);
-						setRand(value);
+						recalculateRandNumber(multiplierA, modulus, seed, iterations);
 					}}
 				>
 					Generar
