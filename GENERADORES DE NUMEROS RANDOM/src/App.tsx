@@ -6,7 +6,6 @@ import "./App.css";
 
 import HomePage from "./components/HomePage";
 import MidSquare from "./components/MidSquare";
-import AnimatedSwitch from "./components/AnimatedSwitch";
 import LinearCongruential from "./components/LinearCongruential";
 import Mutiplicative from "./components/Multiplicative";
 
