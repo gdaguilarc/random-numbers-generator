@@ -79,6 +79,10 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
     history.push(`multiplicative`);
   }, [history]);
 
+  const navToCombinedLineal = useCallback(() => {
+    history.push(`combinedlineal`);
+  }, [history]);
+
   return (
     <Box className={classes.root}>
       <Container maxWidth="xl">
@@ -147,6 +151,25 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
                     className={classes.section2}
                   >
                     Fue propuesto por Lehmer en el año de 1951.
+                  </Typography>
+                </Card>
+              </CardActionArea>
+            </Grid>
+            {/* Medtodo Congruencial Lineal Combinado */}
+            <Grid item xl={4} lg={4} md={6} sm={12}>
+              <CardActionArea onClick={navToCombinedLineal.bind(null)}>
+                <Card className={classes.cards}>
+                  <Typography className={classes.header} variant="h5">
+                    Método Congruencial Lineal Combinado
+                  </Typography>
+                  <Divider className={classes.section2} />
+                  <Typography
+                      variant="subtitle1"
+                      color="textSecondary"
+                      align="justify"
+                      className={classes.section2}
+                  >
+                    Text.
                   </Typography>
                 </Card>
               </CardActionArea>
