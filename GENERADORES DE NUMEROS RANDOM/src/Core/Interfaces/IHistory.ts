@@ -4,7 +4,8 @@ interface IHistory {
 
 export interface HistoryRow {
   seed: number;
-  squared: number;
+  squared?: number;
+  generated?: number;
   res: number;
 }
 

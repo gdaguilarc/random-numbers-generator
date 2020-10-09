@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderRadius: "0.3px",
 			boxShadow: "7px 7px rgba(155, 167, 192, .8)",
 			border: "3px solid #8b96ac",
-			minHeight: "200px",
+			minHeight: "150px",
 			maxHeight: "500px",
 		},
 		darkcard: {
@@ -69,6 +69,14 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 
 	const navToMidSquare = useCallback(() => {
 		history.push(`midsquare`);
+	}, [history]);
+
+	const navToLinCong = useCallback(() => {
+		history.push(`lincong`);
+	}, [history]);
+
+	const navToMultiplicative = useCallback(() => {
+		history.push(`multiplicative`);
 	}, [history]);
 
 	return (
@@ -104,7 +112,7 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 						</Grid>
 						{/* generador multiplicativo */}
 						<Grid item xl={4} lg={4} md={6} sm={12}>
-							<CardActionArea onClick={navToMidSquare.bind(null)}>
+							<CardActionArea onClick={navToMultiplicative.bind(null)}>
 								<Card className={classes.cards}>
 									<Typography className={classes.header} variant='h5'>
 										Generador Multiplicativo
@@ -116,10 +124,27 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 										align='justify'
 										className={classes.section2}
 									>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-										do eiusmod tempor incididunt ut labore et dolore magna
-										aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-										ullamco laboris n
+										El método congruencial multiplicativo (método de Lehmer) es
+										un tipo de generador congruencial lineal
+									</Typography>
+								</Card>
+							</CardActionArea>
+						</Grid>
+						{/* Método de Congruencia Lineal */}
+						<Grid item xl={4} lg={4} md={6} sm={12}>
+							<CardActionArea onClick={navToLinCong.bind(null)}>
+								<Card className={classes.cards}>
+									<Typography className={classes.header} variant='h5'>
+										Método de Congruencia Lineal
+									</Typography>
+									<Divider className={classes.section2} />
+									<Typography
+										variant='subtitle1'
+										color='textSecondary'
+										align='justify'
+										className={classes.section2}
+									>
+										Fue propuesto por Lehmer en el año de 1951.
 									</Typography>
 								</Card>
 							</CardActionArea>

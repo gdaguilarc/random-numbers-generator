@@ -7,6 +7,8 @@ import "./App.css";
 import HomePage from "./components/HomePage";
 import MidSquare from "./components/MidSquare";
 import AnimatedSwitch from "./components/AnimatedSwitch";
+import LinearCongruential from "./components/LinearCongruential";
+import Mutiplicative from "./components/Multiplicative";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/midsquare" component={MidSquare} />
+        <Route exact path="/lincong" component={LinearCongruential} />
+        <Route exact path="/multiplicative" component={Mutiplicative} />
       </Switch>
       <Route exact path="/" render={redirectToHome} />
     </BrowserRouter>

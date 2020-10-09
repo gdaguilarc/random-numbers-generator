@@ -1,10 +1,6 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
@@ -38,19 +34,23 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface HistoryRowProps {
   seed: number;
-  squared?: number;
+  generated?: number;
   res: number;
 }
 
-const HistoryRow: React.FC<HistoryRowProps> = ({ seed, squared, res }) => {
-  const classes = useStyles();
+const HistoryRow: React.FC<HistoryRowProps> = ({ seed, generated, res }) => {
   return (
     <TableRow key={seed}>
-      <TableCell component="th" scope="row">
-        {seed}
-      </TableCell>
-      <TableCell align="right">{squared}</TableCell>
-      <TableCell align="right">{res}</TableCell>
+      {generated || res ? 
+      (
+        <>
+          <TableCell component="th" scope="row">
+            {seed}
+          </TableCell>
+          <TableCell align="right">{generated}</TableCell>
+          <TableCell align="right">{res}</TableCell>
+        </>
+      ) : (<></>)}
     </TableRow>
   );
 };
