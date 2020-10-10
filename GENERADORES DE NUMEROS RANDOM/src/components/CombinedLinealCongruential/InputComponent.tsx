@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
@@ -8,32 +7,10 @@ import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
+import useStyles from "./UseStyles";
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        text: {
-            fontFamily: "Montserrat-Bold",
-        },
-        content: {
-            paddingTop: theme.spacing(3),
-        },
-        cards: {
-            padding: theme.spacing(4),
-            color: theme.palette.text.secondary,
-            borderRadius: "0.3px",
-            border: "3px solid #7c8599",
-        },
-        center: {
-            textAlign: "center",
-            color: theme.palette.primary.main,
-            fontFamily: "Montserrat-Bold",
-        },
-        textField:{
-            marginBottom: theme.spacing(2),
-            marginRight: theme.spacing(2),
-        }
-    })
-);
+import MultiplicativeMethod from "../../Core/Classes/Multiplicative";
+import CombinedLinealMethod from "../../Core/Classes/CombinedLineal";
 
 const ErrorMessage = styled.div`
   position: fixed;
@@ -49,6 +26,23 @@ interface InputComponentProps {
   onKChange(event: any, newValue: number | number[]): void;
   onIterationsChange({ target }: any): void;
   setRand(a: number): void;
+  generatorList: any;
+}
+
+const RecalculateRand = (k: number, iterations: number, list: any) => {
+    let randomList: number[] = [];
+
+    list.forEach((g: {id: number, error: string, seed: number, a: number, modulo: number}) =>{
+        const multGenerator = new MultiplicativeMethod(g.a, g.modulo, g.seed, iterations);
+
+        const rand: number = multGenerator.generate();
+
+        randomList.push(rand);
+    });
+
+    const generator = new CombinedLinealMethod(randomList, iterations, k, list[0].modulo-1);
+
+    return generator.generate();
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
@@ -58,6 +52,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
   onKChange,
   onIterationsChange,
   setRand,
+  generatorList,
 }) => {
   const classes = useStyles();
   return (
@@ -103,11 +98,8 @@ const InputComponent: React.FC<InputComponentProps> = ({
           size="large"
           style={{ color: "white" }}
           onClick={() => {
-            //Change this once you implement the rest
-
-
-
-            setRand(10);
+            const value : number = RecalculateRand(k, iterations, generatorList);
+            setRand(value);
           }}
         >
           Generar

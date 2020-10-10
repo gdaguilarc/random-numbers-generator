@@ -11,29 +11,8 @@ import InputComponent from "./InputComponent";
 import ResultComponent from "./ResultComponent";
 import AboutComponent from "./AboutComponent";
 import MultiplicativeInputComponent from "./MultiplicativeInputComponent";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            backgroundColor: theme.palette.primary.main,
-            minHeight: "100vh",
-            color: theme.palette.common.white,
-            flexFlow: "1",
-            padding: theme.spacing(2),
-        },
-        text: {
-            fontFamily: "Montserrat-Bold",
-        },
-        content: {
-            paddingTop: theme.spacing(3),
-        },
-        center: {
-            textAlign: "center",
-            color: theme.palette.primary.main,
-            fontFamily: "Montserrat-Bold",
-        },
-    })
-);
+import useStyles from "./UseStyles";
+import HistoryList from "../CombinedLinealCongruential/HistoryList";
 
 interface CombinedLinealScreenProps {
     history: History;
@@ -116,6 +95,7 @@ const CombinedLinealScreen: React.FC<CombinedLinealScreenProps> = ({ history }) 
                                         onKChange={onKChange}
                                         onIterationsChange={onIterationsChange}
                                         error={error}
+                                        generatorList={componentList}
                                     />
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12}>
@@ -144,7 +124,7 @@ const CombinedLinealScreen: React.FC<CombinedLinealScreenProps> = ({ history }) 
                         <Grid item xl={4} lg={4} md={6} sm={12}>
                             <Grid container spacing={3}>
                                 <Grid item xl={12} lg={12} md={12} sm={12}>
-
+                                    <HistoryList iterations={iterations} genList={componentList} k={kValue}/>
                                 </Grid>
                             </Grid>
                         </Grid>

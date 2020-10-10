@@ -169,7 +169,7 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
                       align="justify"
                       className={classes.section2}
                   >
-                    Text.
+                    Método Congruencial Lineal Combinado desarrollado por Pierre L'Écuyer.
                   </Typography>
                 </Card>
               </CardActionArea>

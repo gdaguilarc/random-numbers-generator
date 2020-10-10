@@ -5,28 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
 import DoubleArrowRoundedIcon from "@material-ui/icons/DoubleArrowRounded";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        text: {
-            fontFamily: "Montserrat-Bold",
-        },
-        content: {
-            paddingTop: theme.spacing(3),
-        },
-        cards: {
-            padding: theme.spacing(4),
-            color: theme.palette.text.secondary,
-            borderRadius: "0.3px",
-            border: "3px solid #7c8599",
-        },
-        center: {
-            textAlign: "center",
-            color: theme.palette.primary.main,
-            fontFamily: "Montserrat-Bold",
-        },
-    })
-);
+import useStyles from "./UseStyles";
 
 
 interface ResultComponentProps {
