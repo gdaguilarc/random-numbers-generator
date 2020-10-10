@@ -24,13 +24,13 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
   }, [history]);
 
   const navToLinCong = useCallback(() => {
-    history.push(`lincong`)
-  }, [history])
-	  
-	const navToLinMixed = useCallback(() => {
-		history.push(`linmixed`)
-	}, [history])
- 
+    history.push(`lincong`);
+  }, [history]);
+
+  const navToLinMixed = useCallback(() => {
+    history.push(`linmixed`);
+  }, [history]);
+
   const navToMultiplicative = useCallback(() => {
     history.push(`multiplicative`);
   }, [history]);
@@ -92,54 +92,30 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
             </Grid>
             {/* Método de Congruencia Lineal */}
 
-						<Grid item xl={4} lg={4} md={6} sm={12}>
-							<CardActionArea onClick={navToLinCong.bind(null)}>
-								<Card className={classes.cards}>
-									<Typography className={classes.header} variant='h5'>
-										Método de Congruencia Lineal
-									</Typography>
-									<Divider className={classes.section2} />
-									<Typography
-										variant='subtitle1'
-										color='textSecondary'
-										align='justify'
-										className={classes.section2}
-									>
-										Fue propuesto por Lehmer en el año de 1951.
-									</Typography>
-								</Card>
-							</CardActionArea>
-						</Grid>
-			{/* Método de Congruencia Mixto */}
-						<Grid item xl={4} lg={4} md={6} sm={12}>
-							<CardActionArea onClick={navToLinMixed.bind(null)}>
-								<Card className={classes.cards}>
-									<Typography className={classes.header} variant='h5'>
-										Método Congruencial Mixto
-									</Typography>
-									<Divider className={classes.section2} />
-									<Typography
-										variant='subtitle1'
-										color='textSecondary'
-										align='justify'
-										className={classes.section2}
-									>
-										Fue propuesto por Lehmer en el año de 1951.
-									</Typography>
-								</Card>
-							</CardActionArea>
-						</Grid>
-					</Grid>
-				</Box>
-			</Container>
-		</Box>
-	);
-
             <Grid item xl={4} lg={4} md={6} sm={12}>
               <CardActionArea onClick={navToLinCong.bind(null)}>
                 <Card className={classes.cards}>
                   <Typography className={classes.header} variant="h5">
                     Método de Congruencia Lineal
+                  </Typography>
+                  <Divider className={classes.section2} />
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    align="justify"
+                    className={classes.section2}
+                  >
+                    Fue propuesto por Lehmer en el año de 1951.
+                  </Typography>
+                </Card>
+              </CardActionArea>
+            </Grid>
+            {/* Método de Congruencia Mixto */}
+            <Grid item xl={4} lg={4} md={6} sm={12}>
+              <CardActionArea onClick={navToLinMixed.bind(null)}>
+                <Card className={classes.cards}>
+                  <Typography className={classes.header} variant="h5">
+                    Método Congruencial Mixto
                   </Typography>
                   <Divider className={classes.section2} />
                   <Typography
