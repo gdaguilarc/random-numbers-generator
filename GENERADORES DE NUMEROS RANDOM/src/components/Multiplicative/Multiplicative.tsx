@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useCallback } from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { History } from "history";
 
 import AboutComponent from "./AboutComponent";
-import InputComponent from "./InputComponent";
+import InputComponent from "./Input";
 import MultiplicativeMethod from "../../Core/Classes/Multiplicative";
+import HistoryList from "./History";
 
 // DESIGN
 import IconButton from "@material-ui/core/IconButton";
@@ -14,30 +14,8 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import HistoryList from "./HistoryList";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.primary.main,
-      minHeight: "100vh",
-      color: theme.palette.common.white,
-      flexFlow: "1",
-      padding: theme.spacing(2),
-    },
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    content: {
-      paddingTop: theme.spacing(3),
-    },
-    center: {
-      textAlign: "center",
-      color: theme.palette.primary.main,
-      fontFamily: "Montserrat-Bold",
-    },
-  })
-);
+import useStyles from "./MultiplicativeStyles";
 
 interface MultiplicativeScreenProps {
   history: History;
@@ -50,7 +28,7 @@ const Multiplicative: React.FC<MultiplicativeScreenProps> = ({ history }) => {
   const [iterations, setIterations] = useState<number>(10);
   const [multiA, setMultiA] = useState(0);
   const [modulus, setModulus] = useState(0);
-  const [rows, setRows] = useState([0]);
+
   const navBack = useCallback(() => {
     history.replace("/");
   }, [history]);
@@ -68,8 +46,8 @@ const Multiplicative: React.FC<MultiplicativeScreenProps> = ({ history }) => {
     setModulus(parseInt(event.target.value) || 0);
   };
 
-  const handleItersChange = (event: any, newValue: number | number[]) => {
-    setIterations(newValue as number);
+  const handleItersChange = (event: any) => {
+    setIterations(parseInt(event.target.value) || 0);
   };
 
   const recalculateRandNumber = (
@@ -86,7 +64,6 @@ const Multiplicative: React.FC<MultiplicativeScreenProps> = ({ history }) => {
     );
 
     generator.generate();
-    setRows(Array.from(generator.seen));
   };
 
   return (

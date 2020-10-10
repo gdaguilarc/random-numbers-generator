@@ -9,8 +9,6 @@ import Grid from "@material-ui/core/Grid";
 
 import styled from "styled-components";
 
-import MidSquareGenerator from "../../../Core/Classes/MidSquare";
-
 import useStyles from "./InputStyles";
 
 const ErrorMessage = styled.div`
@@ -20,27 +18,35 @@ const ErrorMessage = styled.div`
   margin-top: 20px;
 `;
 
-const recalculateRandNumber = (seed: number, iterations: number) => {
-  const generator = new MidSquareGenerator(seed, iterations);
-  return generator.generate();
-};
-
 interface InputComponentProps {
   error: string;
+  multiplierA: number;
+  modulus: number;
   seed: number;
   iterations: number;
-  onSeedChange({ target }: any): void;
-  onIterationsChange({ target }: any): void;
-  setRand(a: number): void;
+  handleSeedChange: (event: any) => void;
+  handleMultiChange: (event: any) => void;
+  handleModulusChange: (event: any) => void;
+  handleItersChange: (event: any) => void;
+  recalculateRandNumber: (
+    multiplierA: number,
+    modulus: number,
+    seed: number,
+    iterations: number
+  ) => void;
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
   error,
+  multiplierA,
+  modulus,
   seed,
   iterations,
-  onSeedChange,
-  onIterationsChange,
-  setRand,
+  handleSeedChange,
+  handleMultiChange,
+  handleModulusChange,
+  handleItersChange,
+  recalculateRandNumber,
 }) => {
   const classes = useStyles();
   return (
@@ -60,11 +66,29 @@ const InputComponent: React.FC<InputComponentProps> = ({
               id="outlined-basic"
               label="Semilla"
               variant="outlined"
-              defaultValue="0"
               size="small"
-              inputProps={{ maxLength: 4 }}
               value={seed}
-              onChange={onSeedChange}
+              onChange={handleSeedChange}
+            />
+          </Grid>
+          <Grid item sm={6}>
+            <TextField
+              id="outlined-basic"
+              label="Multiplicador"
+              variant="outlined"
+              size="small"
+              value={multiplierA}
+              onChange={handleMultiChange}
+            />
+          </Grid>
+          <Grid item sm={6}>
+            <TextField
+              id="outlined-basic"
+              label="Módulo"
+              variant="outlined"
+              size="small"
+              value={modulus}
+              onChange={handleModulusChange}
             />
           </Grid>
           <Grid item sm={6}>
@@ -72,23 +96,21 @@ const InputComponent: React.FC<InputComponentProps> = ({
               id="outlined-basic"
               label="Iteraciones"
               variant="outlined"
-              defaultValue="0"
               size="small"
               inputProps={{ maxLength: 3 }}
               value={iterations}
-              onChange={onIterationsChange}
+              onChange={handleItersChange}
             />
           </Grid>
 
-          <Grid item sm={6}>
+          <Grid item sm={12}>
             <Button
               variant="contained"
               color="primary"
               size="large"
               style={{ color: "white" }}
               onClick={() => {
-                const value: number = recalculateRandNumber(seed, iterations);
-                setRand(value);
+                recalculateRandNumber(multiplierA, modulus, seed, iterations);
               }}
             >
               Generar
