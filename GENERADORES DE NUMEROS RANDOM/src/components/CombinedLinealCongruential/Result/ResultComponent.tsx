@@ -1,12 +1,11 @@
 import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
 import DoubleArrowRoundedIcon from "@material-ui/icons/DoubleArrowRounded";
-import useStyles from "./UseStyles";
 
+import useStyles from "../CombinedLinealStyles";
 
 interface ResultComponentProps {
   answer: number;

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useCallback } from "react";
 import { History } from "history";
 
-import AboutComponent from "./AboutComponent";
+import AboutComponent from "./About";
 import InputComponent from "./Input";
 import MultiplicativeMethod from "../../Core/Classes/Multiplicative";
 import HistoryList from "./History";
