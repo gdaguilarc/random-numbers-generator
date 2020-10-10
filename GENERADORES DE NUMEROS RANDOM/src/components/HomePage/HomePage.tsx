@@ -46,6 +46,7 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 
         <Box className={classes.content}>
           <Grid container spacing={5}>
+            {/* metodo centros cuadrados */}
             <Grid item xl={4} lg={4} md={6} sm={12}>
               <CardActionArea onClick={navToMidSquare.bind(null)}>
                 <Card className={classes.cards}>
@@ -113,12 +114,13 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
                   </Typography>
                   <Divider className={classes.section2} />
                   <Typography
-                      variant="subtitle1"
-                      color="textSecondary"
-                      align="justify"
-                      className={classes.section2}
+                    variant="subtitle1"
+                    color="textSecondary"
+                    align="justify"
+                    className={classes.section2}
                   >
-                    Método Congruencial Lineal Combinado desarrollado por Pierre L'Écuyer.
+                    Método Congruencial Lineal Combinado desarrollado por Pierre
+                    L'Écuyer.
                   </Typography>
                 </Card>
               </CardActionArea>

@@ -1,38 +1,15 @@
 import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
-import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
 
-// Method
-import MidSquareGenerator from "../../Core/Classes/MidSquare";
+import MidSquareGenerator from "../../../Core/Classes/MidSquare";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    content: {
-      paddingTop: theme.spacing(3),
-    },
-    cards: {
-      padding: theme.spacing(4),
-      color: theme.palette.text.secondary,
-      borderRadius: "0.3px",
-      border: "3px solid #7c8599",
-    },
-    center: {
-      textAlign: "center",
-      color: theme.palette.primary.main,
-      fontFamily: "Montserrat-Bold",
-    },
-  })
-);
+import useStyles from "./InputStyles";
 
 const ErrorMessage = styled.div`
   position: fixed;

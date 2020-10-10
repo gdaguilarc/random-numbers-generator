@@ -3,10 +3,6 @@ import { useState, useCallback } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { History } from "history";
 
-import AboutComponent from "./About/AboutComponent";
-import ResultComponent from "./ResultComponent";
-import InputComponent from "./InputComponent";
-
 // DESIGN
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -15,6 +11,9 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
+import AboutComponent from "./About";
+import ResultComponent from "./Result";
+import InputComponent from "./Input";
 import { HistoryList } from "./History";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,14 +59,14 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
       setError("");
       setSeed(parseInt(target.value) || 0);
     },
-    [seed]
+    [setSeed]
   );
 
   const onIterationsChange = useCallback(
     ({ target }) => {
       setIterations(parseInt(target.value) || 0);
     },
-    [iterations]
+    [setIterations]
   );
 
   return (
