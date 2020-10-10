@@ -1,4 +1,4 @@
-interface LinearCongruential {
+interface ICongruential {
   multiplierA: number;
   incrementC?: number;
   modulus: number;
@@ -6,4 +6,4 @@ interface LinearCongruential {
   validate?(): number;
 }
 
-export default LinearCongruential;
+export default ICongruential;

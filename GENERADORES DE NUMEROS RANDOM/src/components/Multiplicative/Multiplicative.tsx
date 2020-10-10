@@ -1,7 +1,11 @@
 import React from "react";
 import { useState, useCallback } from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { History } from "history";
+
+import AboutComponent from "./About";
+import InputComponent from "./Input";
+import MultiplicativeMethod from "../../Core/Classes/Multiplicative";
+import HistoryList from "./History";
 
 // DESIGN
 import IconButton from "@material-ui/core/IconButton";
@@ -11,63 +15,56 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
-import AboutComponent from "./About";
-import ResultComponent from "./Result";
-import InputComponent from "./Input";
-import { HistoryList } from "./History";
+import useStyles from "./MultiplicativeStyles";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.primary.main,
-      minHeight: "100vh",
-      color: theme.palette.common.white,
-      flexFlow: "1",
-      padding: theme.spacing(2),
-    },
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    content: {
-      paddingTop: theme.spacing(3),
-    },
-    center: {
-      textAlign: "center",
-      color: theme.palette.primary.main,
-      fontFamily: "Montserrat-Bold",
-    },
-  })
-);
-
-interface MidSquareScreenProps {
+interface MultiplicativeScreenProps {
   history: History;
 }
 
-const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
+const Multiplicative: React.FC<MultiplicativeScreenProps> = ({ history }) => {
   const classes = useStyles();
   const [error, setError] = useState("");
   const [seed, setSeed] = useState(0);
-  const [iterations, setIterations] = useState<number>(20);
-  const [rand, setRand] = useState<number>(3.21876);
+  const [iterations, setIterations] = useState<number>(10);
+  const [multiA, setMultiA] = useState(0);
+  const [modulus, setModulus] = useState(0);
 
   const navBack = useCallback(() => {
     history.replace("/");
   }, [history]);
 
-  const onSeedChange = useCallback(
-    ({ target }) => {
-      setError("");
-      setSeed(parseInt(target.value) || 0);
-    },
-    [setSeed]
-  );
+  const handleSeedChange = (event: any) => {
+    setError("");
+    setSeed(parseInt(event.target.value) || 0);
+  };
 
-  const onIterationsChange = useCallback(
-    ({ target }) => {
-      setIterations(parseInt(target.value) || 0);
-    },
-    [setIterations]
-  );
+  const handleMultiChange = (event: any) => {
+    setMultiA(parseInt(event.target.value) || 0);
+  };
+
+  const handleModulusChange = (event: any) => {
+    setModulus(parseInt(event.target.value) || 0);
+  };
+
+  const handleItersChange = (event: any) => {
+    setIterations(parseInt(event.target.value) || 0);
+  };
+
+  const recalculateRandNumber = (
+    multiplierA: number,
+    modulus: number,
+    seed: number,
+    iterations: number
+  ) => {
+    const generator = new MultiplicativeMethod(
+      multiplierA,
+      modulus,
+      seed,
+      iterations
+    );
+
+    generator.generate();
+  };
 
   return (
     <Box className={classes.root}>
@@ -76,7 +73,7 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
           <IconButton size="medium" onClick={navBack}>
             <ArrowBackIosIcon fontSize="inherit" />
           </IconButton>
-          METODO DE LOS CENTROS CUADRADOS
+          METODO CONGRUENCIAL MULTIPLICATIVO
         </Typography>
         <Box className={classes.content}>
           <Grid container spacing={3}>
@@ -91,23 +88,29 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
               <Grid container spacing={3}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <InputComponent
+                    multiplierA={multiA}
+                    modulus={modulus}
                     seed={seed}
                     iterations={iterations}
-                    setRand={setRand}
-                    onSeedChange={onSeedChange}
-                    onIterationsChange={onIterationsChange}
+                    handleSeedChange={handleSeedChange}
+                    handleMultiChange={handleMultiChange}
+                    handleModulusChange={handleModulusChange}
+                    handleItersChange={handleItersChange}
+                    recalculateRandNumber={recalculateRandNumber}
                     error={error}
                   />
-                </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12}>
-                  <ResultComponent answer={rand} />
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xl={4} lg={4} md={6} sm={12}>
               <Grid container spacing={3}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
-                  <HistoryList seed={seed} iterations={iterations} />
+                  <HistoryList
+                    multiplierA={multiA}
+                    modulus={modulus}
+                    seed={seed}
+                    iterations={iterations}
+                  />
                 </Grid>
               </Grid>
             </Grid>
@@ -118,4 +121,4 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
   );
 };
 
-export default MidSquareScreen;
+export default Multiplicative;
