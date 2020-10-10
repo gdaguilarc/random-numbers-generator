@@ -8,6 +8,7 @@ import HomePage from "./components/HomePage";
 import MidSquare from "./components/MidSquare";
 import LinearCongruential from "./components/LinearCongruential";
 import Mutiplicative from "./components/Multiplicative";
+import CombinedLinealScreen from "./components/CombinedLinealCongruential";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/midsquare" component={MidSquare} />
         <Route exact path="/lincong" component={LinearCongruential} />
         <Route exact path="/multiplicative" component={Mutiplicative} />
+        <Route exact path="/combinedlineal" component={CombinedLinealScreen} />
       </Switch>
       <Route exact path="/" render={redirectToHome} />
     </HashRouter>
