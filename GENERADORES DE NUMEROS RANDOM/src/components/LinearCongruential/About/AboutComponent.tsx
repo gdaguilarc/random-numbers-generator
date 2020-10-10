@@ -1,37 +1,10 @@
 import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    header: {
-      fontWeight: "bold",
-    },
-    media: {
-      height: 0,
-      paddingTop: "56.25%", // 16:9
-    },
-    cards: {
-      padding: theme.spacing(4),
-      color: theme.palette.text.secondary,
-      borderRadius: "0.3px",
-      border: "3px solid #7c8599",
-    },
-    section2: {
-      margin: theme.spacing(2, 0),
-    },
-    imageCentered: {
-      alignItems: "center",
-      textAlign: "center",
-    },
-  })
-);
+import useStyles from "./AboutStyles";
 
 const AboutComponent: React.FC = () => {
   const classes = useStyles();
@@ -49,8 +22,8 @@ const AboutComponent: React.FC = () => {
             color="textSecondary"
             className={classes.section2}
           >
-            Es un algoritmo que fue propuesto en el año de 1951 
-            por Derrick Henry Lehmer.
+            Es un algoritmo que fue propuesto en el año de 1951 por Derrick
+            Henry Lehmer.
           </Typography>
         </Grid>
         <Grid item sm={12} lg={12} className={classes.imageCentered}>
@@ -76,10 +49,10 @@ const AboutComponent: React.FC = () => {
             color="textSecondary"
             className={classes.section2}
           >
-            Es un algoritmo que permite obtener una secuencia de 
-            números pseudoaleatorios calculados con una función lineal discontinua.
-            Es uno de los métodos más antiguos y conocidos para 
-            la generación de números pseudoaleatorios.
+            Es un algoritmo que permite obtener una secuencia de números
+            pseudoaleatorios calculados con una función lineal discontinua. Es
+            uno de los métodos más antiguos y conocidos para la generación de
+            números pseudoaleatorios.
           </Typography>
         </Grid>
       </Grid>

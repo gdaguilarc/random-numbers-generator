@@ -3,7 +3,6 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
-import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -30,7 +29,7 @@ interface InputComponentProps {
   handleMultiChange: (event: any) => void;
   handleIncrCChange: (event: any) => void;
   handleModulusChange: (event: any) => void;
-  handleItersChange: (event: any, newValue: number | number[]) => void;
+  handleItersChange: (event: any) => void;
   recalculateRandNumber: (
     multiplierA: number,
     incrementC: number,
@@ -108,10 +107,13 @@ const InputComponent: React.FC<InputComponentProps> = ({
             />
           </Grid>
           <Grid item sm={12}>
-            <Slider
+            <TextField
+              id="outlined-basic"
+              label="Iteraciones"
+              variant="outlined"
+              size="small"
+              inputProps={{ maxLength: 3 }}
               value={iterations}
-              step={1}
-              valueLabelDisplay="auto"
               onChange={handleItersChange}
             />
           </Grid>

@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useCallback } from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { History } from "history";
 
-import AboutComponent from "./AboutComponent";
-import InputComponent from "./InputComponent";
+import LinearCongruentialMethod from "../../Core/Classes/LinearCongruential";
+
+import AboutComponent from "./About";
+import InputComponent from "./Input";
+import HistoryList from "./History";
 
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -12,31 +14,8 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import LinearCongruentialMethod from "../../Core/Classes/LinearCongruential";
-import HistoryList from "./HistoryList";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.primary.main,
-      minHeight: "100vh",
-      color: theme.palette.common.white,
-      flexFlow: "1",
-      padding: theme.spacing(2),
-    },
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    content: {
-      paddingTop: theme.spacing(3),
-    },
-    center: {
-      textAlign: "center",
-      color: theme.palette.primary.main,
-      fontFamily: "Montserrat-Bold",
-    },
-  })
-);
+import useStyles from "./LinearCongruentialStyles";
 
 interface LinearCongruentialProps {
   history: History;
@@ -50,7 +29,6 @@ const LinearCongruential: React.FC<LinearCongruentialProps> = ({ history }) => {
   const [incrC, setIncrC] = useState(0);
   const [modulus, setModulus] = useState(0);
   const [iterations, setIterations] = useState<number>(10);
-  //   const [rows, setRows] = useState([0]);
 
   const navBack = useCallback(() => {
     history.replace("/");
@@ -73,8 +51,8 @@ const LinearCongruential: React.FC<LinearCongruentialProps> = ({ history }) => {
     setModulus(parseInt(event.target.value) || 0);
   };
 
-  const handleItersChange = (event: any, newValue: number | number[]) => {
-    setIterations(newValue as number);
+  const handleItersChange = (event: any) => {
+    setIterations(parseInt(event.target.value) || 0);
   };
 
   const recalculateRandNumber = (

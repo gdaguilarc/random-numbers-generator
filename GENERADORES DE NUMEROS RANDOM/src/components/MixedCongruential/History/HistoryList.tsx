@@ -62,15 +62,17 @@ const HistoryList: React.FC<HistoryListProps> = ({
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <TableCell>Semilla</TableCell>
-              <TableCell>Generado</TableCell>
-              <TableCell>Numero Random (Ri)</TableCell>
+              <TableCell align="right">#</TableCell>
+              <TableCell align="right">Semilla</TableCell>
+              <TableCell align="right">Generado</TableCell>
+              <TableCell align="right">Numero Random (Ri)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, key) => (
+            {rows.map((row, index) => (
               <HistoryRow
-                key={key}
+                key={index}
+                index={index}
                 seed={row.seed}
                 generated={row.generated}
                 res={row.res}

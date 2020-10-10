@@ -1,37 +1,15 @@
 import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
-import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 
 import styled from "styled-components";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    content: {
-      paddingTop: theme.spacing(3),
-    },
-    cards: {
-      padding: theme.spacing(4),
-      color: theme.palette.text.secondary,
-      borderRadius: "0.3px",
-      border: "3px solid #7c8599",
-    },
-    center: {
-      textAlign: "center",
-      color: theme.palette.primary.main,
-      fontFamily: "Montserrat-Bold",
-    },
-  })
-);
+import useStyles from "./InputStyles";
 
 const ErrorMessage = styled.div`
   position: fixed;
@@ -51,7 +29,7 @@ interface InputComponentProps {
   handleMultiChange: (event: any) => void;
   handleIncrCChange: (event: any) => void;
   handleModulusChange: (event: any) => void;
-  handleItersChange: (event: any, newValue: number | number[]) => void;
+  handleItersChange: (event: any) => void;
   recalculateRandNumber: (
     multiplierA: number,
     incrementC: number,
@@ -95,7 +73,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
               variant="outlined"
               size="small"
               value={seed}
-              onChange={(e) => handleSeedChange(e)}
+              onChange={handleSeedChange}
             />
           </Grid>
           <Grid item sm={6}>
@@ -105,7 +83,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
               variant="outlined"
               size="small"
               value={multiplierA}
-              onChange={(e) => handleMultiChange(e)}
+              onChange={handleMultiChange}
             />
           </Grid>
           <Grid item sm={6}>
@@ -115,7 +93,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
               variant="outlined"
               size="small"
               value={incrementC}
-              onChange={(e) => handleIncrCChange(e)}
+              onChange={handleIncrCChange}
             />
           </Grid>
           <Grid item sm={6}>
@@ -125,15 +103,18 @@ const InputComponent: React.FC<InputComponentProps> = ({
               variant="outlined"
               size="small"
               value={modulus}
-              onChange={(e) => handleModulusChange(e)}
+              onChange={handleModulusChange}
             />
           </Grid>
 
           <Grid item sm={12}>
-            <Slider
+            <TextField
+              id="outlined-basic"
+              label="Iteraciones"
+              variant="outlined"
+              size="small"
+              inputProps={{ maxLength: 3 }}
               value={iterations}
-              step={1}
-              valueLabelDisplay="auto"
               onChange={handleItersChange}
             />
           </Grid>

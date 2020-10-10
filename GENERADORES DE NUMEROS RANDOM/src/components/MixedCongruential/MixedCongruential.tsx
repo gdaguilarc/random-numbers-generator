@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useCallback } from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { History } from "history";
 
 import AboutComponent from "./About";
-import InputComponent from "./Input/InputComponent";
+import InputComponent from "./Input";
 import HistoryList from "./History";
+import PassOrFail from "./Validation";
 
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -15,30 +15,8 @@ import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import MixedCongruentialMethod from "../../Core/Classes/MixedCongruential";
-import PassOrFail from "./PassOrFail";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.primary.main,
-      minHeight: "100vh",
-      color: theme.palette.common.white,
-      flexFlow: "1",
-      padding: theme.spacing(2),
-    },
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    content: {
-      paddingTop: theme.spacing(3),
-    },
-    center: {
-      textAlign: "center",
-      color: theme.palette.primary.main,
-      fontFamily: "Montserrat-Bold",
-    },
-  })
-);
+import useStyles from "./MixedCongruentialStyles";
 
 interface MixedCongruentialProps {
   history: History;
@@ -52,7 +30,6 @@ const MixedCongruential: React.FC<MixedCongruentialProps> = ({ history }) => {
   const [incrC, setIncrC] = useState(0);
   const [modulus, setModulus] = useState(0);
   const [iterations, setIterations] = useState<number>(10);
-  const [rows, setRows] = useState([0]);
 
   const navBack = useCallback(() => {
     history.replace("/");
@@ -75,8 +52,8 @@ const MixedCongruential: React.FC<MixedCongruentialProps> = ({ history }) => {
     setModulus(parseInt(event.target.value) || 0);
   };
 
-  const handleItersChange = (event: any, newValue: number | number[]) => {
-    setIterations(newValue as number);
+  const handleItersChange = (event: any) => {
+    setIterations(parseInt(event.target.value) || 0);
   };
 
   const recalculateRandNumber = (
@@ -95,7 +72,6 @@ const MixedCongruential: React.FC<MixedCongruentialProps> = ({ history }) => {
     );
 
     generator.generate();
-    setRows(Array.from(generator.seen));
   };
 
   return (

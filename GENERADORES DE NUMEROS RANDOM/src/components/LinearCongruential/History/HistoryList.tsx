@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
@@ -10,50 +9,36 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import LinearCongruential from "../../Core/Classes/LinearCongruential";
+
+import LinearCongruential from "../../../Core/Classes/LinearCongruential";
 import HistoryRow from "./HistoryRow";
 
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    header: {
-      fontWeight: "bold",
-    },
-    media: {
-      height: 0,
-      paddingTop: "56.25%", // 16:9
-    },
-    cards: {
-      padding: theme.spacing(4),
-      color: theme.palette.text.secondary,
-      borderRadius: "0.3px",
-      border: "3px solid #7c8599",
-    },
-    section2: {
-      margin: theme.spacing(2, 0),
-    },
-    imageCentered: {
-      alignItems: "center",
-      textAlign: "center",
-    },
-  })
-);
+import useStyles from "./HistoryListStyles";
 
 interface HistoryListProps {
-  multiplierA: number
-  incrementC: number
-  modulus: number
-  seed: number
-  iterations: number
+  multiplierA: number;
+  incrementC: number;
+  modulus: number;
+  seed: number;
+  iterations: number;
 }
 
-const HistoryList: React.FC<HistoryListProps> = ({ multiplierA, incrementC, modulus, seed, iterations }) => {
+const HistoryList: React.FC<HistoryListProps> = ({
+  multiplierA,
+  incrementC,
+  modulus,
+  seed,
+  iterations,
+}) => {
   const classes = useStyles();
 
-  const generator = new LinearCongruential(multiplierA, incrementC, modulus, seed, iterations);
+  const generator = new LinearCongruential(
+    multiplierA,
+    incrementC,
+    modulus,
+    seed,
+    iterations
+  );
   const rows = generator.history();
 
   return (
@@ -76,14 +61,21 @@ const HistoryList: React.FC<HistoryListProps> = ({ multiplierA, incrementC, modu
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <TableCell>Semilla</TableCell>
-              <TableCell>Generado</TableCell>
-              <TableCell>Numero Random (Ri)</TableCell>
+              <TableCell align="right">#</TableCell>
+              <TableCell align="right">Semilla</TableCell>
+              <TableCell align="right">Generado</TableCell>
+              <TableCell align="right">Numero Random (Ri)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row, key) => (
-              <HistoryRow key={key} seed={row.seed} generated={row.generated} res={row.res} />
+              <HistoryRow
+                key={key}
+                index={key}
+                seed={row.seed}
+                generated={row.generated}
+                res={row.res}
+              />
             ))}
           </TableBody>
         </Table>
