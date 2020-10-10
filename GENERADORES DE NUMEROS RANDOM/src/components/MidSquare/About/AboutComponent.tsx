@@ -29,7 +29,11 @@ const AboutComponent: React.FC = () => {
         <Grid item sm={12} lg={12} className={classes.imageCentered}>
           <Grid container spacing={1}>
             <Grid item sm={12}>
-              <img src="./img/john_von_neumann.jpg" width="150px" />
+              <img
+                src="./img/john_von_neumann.jpg"
+                width="150px"
+                alt="John Von Neumann"
+              />
             </Grid>
             <Grid item sm={12}>
               <Typography
