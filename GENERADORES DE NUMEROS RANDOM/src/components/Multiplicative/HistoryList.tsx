@@ -12,7 +12,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import HistoryRow from "./HistoryRow";
 
-import MidSquare from "../../Core/Classes/MidSquare";
+import Multiplicative from "../../Core/Classes/Multiplicative";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -43,14 +43,21 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface HistoryListProps {
+	multiplierA: number;
+	modulus: number;
 	seed: number;
 	iterations: number;
 }
 
-const HistoryList: React.FC<HistoryListProps> = ({ seed, iterations }) => {
+const HistoryList: React.FC<HistoryListProps> = ({
+	multiplierA,
+	modulus,
+	seed,
+	iterations,
+}) => {
 	const classes = useStyles();
 
-	const generator = new MidSquare(seed, iterations);
+	const generator = new Multiplicative(multiplierA, modulus, seed, iterations);
 	const rows = generator.history();
 
 	return (
@@ -74,13 +81,18 @@ const HistoryList: React.FC<HistoryListProps> = ({ seed, iterations }) => {
 					<TableHead>
 						<TableRow>
 							<TableCell>Semilla</TableCell>
-							<TableCell>Al cuadrado</TableCell>
-							<TableCell>Nuevo número</TableCell>
+							<TableCell>Generado</TableCell>
+							<TableCell>Numero Random (Ri)</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{rows.map((row) => (
-							<HistoryRow seed={row.seed} squared={row.squared} res={row.res} />
+						{rows.map((row, key) => (
+							<HistoryRow
+								key={key}
+								seed={row.seed}
+								generated={row.generated}
+								res={row.res}
+							/>
 						))}
 					</TableBody>
 				</Table>

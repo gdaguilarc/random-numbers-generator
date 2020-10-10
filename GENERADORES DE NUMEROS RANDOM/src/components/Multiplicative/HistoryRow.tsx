@@ -38,19 +38,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface HistoryRowProps {
 	seed: number;
-	squared?: number;
+	generated?: number;
 	res: number;
 }
 
-const HistoryRow: React.FC<HistoryRowProps> = ({ seed, squared, res }) => {
+const HistoryRow: React.FC<HistoryRowProps> = ({ seed, generated, res }) => {
 	const classes = useStyles();
 	return (
 		<TableRow key={seed}>
-			<TableCell component='th' scope='row'>
-				{seed}
-			</TableCell>
-			<TableCell align='right'>{squared}</TableCell>
-			<TableCell align='right'>{res}</TableCell>
+			{generated || res ? (
+				<>
+					<TableCell component='th' scope='row'>
+						{seed}
+					</TableCell>
+					<TableCell align='center'>{generated}</TableCell>
+					<TableCell align='center'>{res}</TableCell>
+				</>
+			) : (
+				<></>
+			)}
 		</TableRow>
 	);
 };

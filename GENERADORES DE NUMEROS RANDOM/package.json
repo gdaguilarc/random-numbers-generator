@@ -5,7 +5,7 @@
   "description": "Random numbers",
   "author": "David Aguilar",
   "build": {
-    "appId": "com.itesm.random"
+    "appId": "com.itesm.randomNumbers"
   },
   "main": "public/electron.js",
   "homepage": "./",

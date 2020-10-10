@@ -2,13 +2,6 @@ import React from "react";
 import { History } from "history";
 import { useCallback } from "react";
 
-import {
-  makeStyles,
-  createStyles,
-  Theme,
-  useTheme,
-} from "@material-ui/core/styles";
-
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
@@ -17,47 +10,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Divider from "@material-ui/core/Divider";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.primary.light,
-      minHeight: "100vh",
-      color: theme.palette.primary.dark,
-      flexFlow: "1",
-    },
-    container: {
-      padding: theme.spacing(2),
-    },
-    text: {
-      fontFamily: "Montserrat-Bold",
-    },
-    cards: {
-      padding: theme.spacing(4),
-      color: theme.palette.text.secondary,
-      borderRadius: "0.3px",
-      boxShadow: "7px 7px rgba(155, 167, 192, .8)",
-      border: "3px solid #8b96ac",
-      minHeight: "200px",
-      maxHeight: "500px",
-    },
-    darkcard: {
-      backgroundColor: theme.palette.primary.dark,
-    },
-    header: {
-      fontWeight: "bold",
-      textAlign: "center",
-    },
-    section2: {
-      margin: theme.spacing(2),
-    },
-    content: {
-      paddingTop: "2%",
-    },
-    section3: {
-      margin: theme.spacing(1, 1, 1),
-    },
-  })
-);
+import useStyles from "./HomePageStyles";
 
 interface HomePageProps {
   history: History;
@@ -65,7 +18,6 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ history }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   const navToMidSquare = useCallback(() => {
     history.push(`midsquare`);
@@ -94,7 +46,6 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
 
         <Box className={classes.content}>
           <Grid container spacing={5}>
-            {/* metodo centros cuadrados */}
             <Grid item xl={4} lg={4} md={6} sm={12}>
               <CardActionArea onClick={navToMidSquare.bind(null)}>
                 <Card className={classes.cards}>
@@ -128,10 +79,8 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
                     align="justify"
                     className={classes.section2}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris n
+                    El método congruencial multiplicativo (método de Lehmer) es
+                    un tipo de generador congruencial lineal
                   </Typography>
                 </Card>
               </CardActionArea>

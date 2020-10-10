@@ -51,20 +51,33 @@ const recalculateRandNumber = (seed: number, iterations: number) => {
 
 interface InputComponentProps {
 	error: string;
+	multiplierA: number;
+	modulus: number;
 	seed: number;
 	iterations: number;
-	onSeedChange({ target }: any): void;
-	onIterationsChange(event: any, newValue: number | number[]): void;
-	setRand(a: number): void;
+	handleSeedChange: (event: any) => void;
+	handleMultiChange: (event: any) => void;
+	handleModulusChange: (event: any) => void;
+	handleItersChange: (event: any, newValue: number | number[]) => void;
+	recalculateRandNumber: (
+		multiplierA: number,
+		modulus: number,
+		seed: number,
+		iterations: number
+	) => void;
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
 	error,
+	multiplierA,
+	modulus,
 	seed,
 	iterations,
-	onSeedChange,
-	onIterationsChange,
-	setRand,
+	handleSeedChange,
+	handleMultiChange,
+	handleModulusChange,
+	handleItersChange,
+	recalculateRandNumber,
 }) => {
 	const classes = useStyles();
 	return (
@@ -82,18 +95,35 @@ const InputComponent: React.FC<InputComponentProps> = ({
 					id='outlined-basic'
 					label='Semilla'
 					variant='outlined'
-					defaultValue='0'
 					size='small'
-					inputProps={{ maxLength: 4 }}
 					value={seed}
-					onChange={onSeedChange}
+					onChange={(e) => handleSeedChange(e)}
 				/>
+				<br />
+				<TextField
+					id='outlined-basic'
+					label='Multiplicador'
+					variant='outlined'
+					size='small'
+					value={multiplierA}
+					onChange={(e) => handleMultiChange(e)}
+				/>
+				<br />
+				<TextField
+					id='outlined-basic'
+					label='Módulo'
+					variant='outlined'
+					size='small'
+					value={modulus}
+					onChange={(e) => handleModulusChange(e)}
+				/>
+				<br />
 
 				<Slider
 					value={iterations}
 					step={1}
 					valueLabelDisplay='auto'
-					onChange={onIterationsChange}
+					onChange={handleItersChange}
 				/>
 
 				<Button
@@ -102,8 +132,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
 					size='large'
 					style={{ color: "white" }}
 					onClick={() => {
-						const value: number = recalculateRandNumber(seed, iterations);
-						setRand(value);
+						recalculateRandNumber(multiplierA, modulus, seed, iterations);
 					}}
 				>
 					Generar

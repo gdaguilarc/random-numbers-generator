@@ -1,19 +1,18 @@
 import React from "react";
 
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { HashRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import "./App.css";
 
 import HomePage from "./components/HomePage";
 import MidSquare from "./components/MidSquare";
-import AnimatedSwitch from "./components/AnimatedSwitch";
 import LinearCongruential from "./components/LinearCongruential";
 import Mutiplicative from "./components/Multiplicative";
 import CombinedLinealScreen from "./components/CombinedLinealCongruential";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/midsquare" component={MidSquare} />
@@ -22,7 +21,7 @@ function App() {
         <Route exact path="/combinedlineal" component={CombinedLinealScreen} />
       </Switch>
       <Route exact path="/" render={redirectToHome} />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

@@ -4,8 +4,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { History } from "history";
 
 import AboutComponent from "./AboutComponent";
-import ResultComponent from "./ResultComponent";
 import InputComponent from "./InputComponent";
+import MultiplicativeMethod from "../../Core/Classes/Multiplicative";
 
 // DESIGN
 import IconButton from "@material-ui/core/IconButton";
@@ -43,29 +43,50 @@ interface MultiplicativeScreenProps {
   history: History;
 }
 
-const MultiplicativeScreen: React.FC<MultiplicativeScreenProps> = ({
-  history,
-}) => {
+const Multiplicative: React.FC<MultiplicativeScreenProps> = ({ history }) => {
   const classes = useStyles();
   const [error, setError] = useState("");
   const [seed, setSeed] = useState(0);
-  const [iterations, setIterations] = useState<number>(20);
-  const [rand, setRand] = useState<number>(3.21876);
-
+  const [iterations, setIterations] = useState<number>(10);
+  const [multiA, setMultiA] = useState(0);
+  const [modulus, setModulus] = useState(0);
+  const [rows, setRows] = useState([0]);
   const navBack = useCallback(() => {
     history.replace("/");
   }, [history]);
 
-  const onSeedChange = useCallback(
-    ({ target }) => {
-      setError("");
-      setSeed(parseInt(target.value) || 0);
-    },
-    [seed]
-  );
+  const handleSeedChange = (event: any) => {
+    setError("");
+    setSeed(parseInt(event.target.value) || 0);
+  };
 
-  const onIterationsChange = (event: any, newValue: number | number[]) => {
+  const handleMultiChange = (event: any) => {
+    setMultiA(parseInt(event.target.value) || 0);
+  };
+
+  const handleModulusChange = (event: any) => {
+    setModulus(parseInt(event.target.value) || 0);
+  };
+
+  const handleItersChange = (event: any, newValue: number | number[]) => {
     setIterations(newValue as number);
+  };
+
+  const recalculateRandNumber = (
+    multiplierA: number,
+    modulus: number,
+    seed: number,
+    iterations: number
+  ) => {
+    const generator = new MultiplicativeMethod(
+      multiplierA,
+      modulus,
+      seed,
+      iterations
+    );
+
+    generator.generate();
+    setRows(Array.from(generator.seen));
   };
 
   return (
@@ -75,7 +96,7 @@ const MultiplicativeScreen: React.FC<MultiplicativeScreenProps> = ({
           <IconButton size="medium" onClick={navBack}>
             <ArrowBackIosIcon fontSize="inherit" />
           </IconButton>
-          METODO DE LOS CENTROS CUADRADOS
+          METODO CONGRUENCIAL MULTIPLICATIVO
         </Typography>
         <Box className={classes.content}>
           <Grid container spacing={3}>
@@ -90,23 +111,29 @@ const MultiplicativeScreen: React.FC<MultiplicativeScreenProps> = ({
               <Grid container spacing={3}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <InputComponent
+                    multiplierA={multiA}
+                    modulus={modulus}
                     seed={seed}
                     iterations={iterations}
-                    setRand={setRand}
-                    onSeedChange={onSeedChange}
-                    onIterationsChange={onIterationsChange}
+                    handleSeedChange={handleSeedChange}
+                    handleMultiChange={handleMultiChange}
+                    handleModulusChange={handleModulusChange}
+                    handleItersChange={handleItersChange}
+                    recalculateRandNumber={recalculateRandNumber}
                     error={error}
                   />
-                </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12}>
-                  <ResultComponent answer={rand} />
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xl={4} lg={4} md={6} sm={12}>
               <Grid container spacing={3}>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
-                  <HistoryList seed={seed} iterations={iterations} />
+                  <HistoryList
+                    multiplierA={multiA}
+                    modulus={modulus}
+                    seed={seed}
+                    iterations={iterations}
+                  />
                 </Grid>
               </Grid>
             </Grid>
@@ -117,4 +144,4 @@ const MultiplicativeScreen: React.FC<MultiplicativeScreenProps> = ({
   );
 };
 
-export default MultiplicativeScreen;
+export default Multiplicative;

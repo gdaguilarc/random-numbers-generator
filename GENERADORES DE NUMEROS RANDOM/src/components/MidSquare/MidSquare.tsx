@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { History } from "history";
 
-import AboutComponent from "./AboutComponent";
+import AboutComponent from "./About/AboutComponent";
 import ResultComponent from "./ResultComponent";
 import InputComponent from "./InputComponent";
 
@@ -14,7 +14,8 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import HistoryList from "./HistoryList";
+
+import { HistoryList } from "./History";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,9 +63,12 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
     [seed]
   );
 
-  const onIterationsChange = (event: any, newValue: number | number[]) => {
-    setIterations(newValue as number);
-  };
+  const onIterationsChange = useCallback(
+    ({ target }) => {
+      setIterations(parseInt(target.value) || 0);
+    },
+    [iterations]
+  );
 
   return (
     <Box className={classes.root}>
