@@ -81,6 +81,8 @@ class Smirnov
     }
 
     test(): string{
+        if(this.seen.length > 46) return "El valor de N excede 46.";
+
         let alphaIndex: number;
         if(this.alpha == 0.2){
             alphaIndex = 0
