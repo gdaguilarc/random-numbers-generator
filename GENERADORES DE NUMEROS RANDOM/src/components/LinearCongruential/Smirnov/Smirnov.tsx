@@ -37,12 +37,14 @@ const Smirnov: React.FC<PassOrFailProps> = ({
   generator.generate();
 
   const [alpha, setAlpha] = useState(0.1);
-  const [test, setTest] = useState(new SmirnovTest(generator.ri, alpha));
+  const test = new SmirnovTest(generator.ri, alpha);
 
-  const handleChange = (event: any) => {
-    setAlpha(event.target.value);
-    setTest(new SmirnovTest(generator.ri, alpha));
-  };
+  const handleChange = useCallback(
+    (event: any) => {
+      setAlpha(event.target.value);
+    },
+    [alpha, setAlpha]
+  );
 
   return (
     <Card className={classes.cards}>

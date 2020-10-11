@@ -29,13 +29,14 @@ const SquaeedChi: React.FC<PassOrFailProps> = ({
   generator.generate();
 
   const [alpha, setAlpha] = useState(0.1);
-  const [test, setTest] = useState(new SquaredChi(generator.seen, alpha));
+  const test = new SquaredChi(generator.seen, alpha);
 
-  const handleChange = (event: any) => {
-    setAlpha(event.target.value);
-    setTest(new SquaredChi(generator.ri, alpha));
-  };
-
+  const handleChange = useCallback(
+    (event: any) => {
+      setAlpha(event.target.value);
+    },
+    [alpha, setAlpha]
+  );
   return (
     <Card className={classes.cards}>
       <Grid container spacing={1}>

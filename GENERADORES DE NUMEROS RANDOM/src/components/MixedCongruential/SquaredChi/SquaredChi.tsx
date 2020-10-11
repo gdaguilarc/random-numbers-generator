@@ -19,7 +19,7 @@ interface PassOrFailProps {
   incrementC: number;
 }
 
-const PassOrFail: React.FC<PassOrFailProps> = ({
+const SquaredChiComponent: React.FC<PassOrFailProps> = ({
   multiplierA,
   modulus,
   seed,
@@ -27,6 +27,7 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   incrementC,
 }) => {
   const classes = useStyles();
+
   const generator = new MixedCongruential(
     multiplierA,
     incrementC,
@@ -34,15 +35,18 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
     seed,
     iterations
   );
+
   generator.generate();
 
   const [alpha, setAlpha] = useState(0.1);
-  const [test, setTest] = useState(new SquaredChi(generator.ri, alpha));
+  const test = new SquaredChi(generator.ri, alpha).test();
 
-  const handleChange = (event: any) => {
-    setAlpha(event.target.value);
-    setTest(new SquaredChi(generator.ri, alpha));
-  };
+  const handleChange = useCallback(
+    (event: any) => {
+      setAlpha(event.target.value);
+    },
+    [alpha, setAlpha]
+  );
 
   return (
     <Card className={classes.cards}>
@@ -62,7 +66,7 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
             color="textSecondary"
             className={classes.section2}
           >
-            {test.test()}
+            {test}
           </Typography>
         </Grid>
 
@@ -87,4 +91,4 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   );
 };
 
-export default PassOrFail;
+export default SquaredChiComponent;
