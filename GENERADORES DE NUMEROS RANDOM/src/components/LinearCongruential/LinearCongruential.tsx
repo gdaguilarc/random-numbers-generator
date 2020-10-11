@@ -17,6 +17,7 @@ import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import useStyles from "./LinearCongruentialStyles";
+import Smirnov from "./Smirnov";
 
 interface LinearCongruentialProps {
   history: History;
@@ -113,6 +114,15 @@ const LinearCongruential: React.FC<LinearCongruentialProps> = ({ history }) => {
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <SquaredChi
+                    multiplierA={multiA}
+                    modulus={modulus}
+                    seed={seed}
+                    iterations={iterations}
+                    incrementC={incrC}
+                  />
+                </Grid>
+                <Grid item xl={12} lg={12} md={12} sm={12}>
+                  <Smirnov
                     multiplierA={multiA}
                     modulus={modulus}
                     seed={seed}

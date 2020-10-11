@@ -12,6 +12,7 @@ class MixedCongruentialMethod
   incrementC: number;
   modulus: number;
   hasPeriod: boolean;
+  ri: number[];
 
   constructor(
     multiplierA: number,
@@ -22,6 +23,7 @@ class MixedCongruentialMethod
   ) {
     super(seed, iterations);
     this.seen = [];
+    this.ri = [];
     this.multiplierA = multiplierA;
     this.incrementC = incrementC;
     this.modulus = modulus;
@@ -30,6 +32,7 @@ class MixedCongruentialMethod
 
   generate(): number {
     const seen: Set<number> = new Set();
+    const ri: Set<number> = new Set();
 
     let answer: number = this.seed;
     let counter: number = 0;
@@ -37,10 +40,12 @@ class MixedCongruentialMethod
     while (counter < this.iterations) {
       counter++;
       answer = (this.multiplierA * answer + this.incrementC) % this.modulus;
+      ri.add(answer / this.modulus);
       seen.add(answer);
     }
 
     this.seen = Array.from(seen);
+    this.ri = Array.from(ri);
     return answer;
   }
 

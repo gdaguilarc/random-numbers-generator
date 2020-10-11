@@ -8,8 +8,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 
 import useStyles from "./ValidationStyles";
-import SquaredChi from "../../../Core/Classes/SquaredChi";
-import MixedCongruential from "../../../Core/Classes/MixedCongruential";
+import LinearCongruentialMethod from "../../../Core/Classes/LinearCongruential";
+import SmirnovTest from "../../../Core/Classes/Smirnov";
 
 interface PassOrFailProps {
   multiplierA: number;
@@ -19,7 +19,7 @@ interface PassOrFailProps {
   incrementC: number;
 }
 
-const PassOrFail: React.FC<PassOrFailProps> = ({
+const Smirnov: React.FC<PassOrFailProps> = ({
   multiplierA,
   modulus,
   seed,
@@ -27,7 +27,7 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   incrementC,
 }) => {
   const classes = useStyles();
-  const generator = new MixedCongruential(
+  const generator = new LinearCongruentialMethod(
     multiplierA,
     incrementC,
     modulus,
@@ -37,11 +37,11 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   generator.generate();
 
   const [alpha, setAlpha] = useState(0.1);
-  const [test, setTest] = useState(new SquaredChi(generator.ri, alpha));
+  const [test, setTest] = useState(new SmirnovTest(generator.ri, alpha));
 
   const handleChange = (event: any) => {
     setAlpha(event.target.value);
-    setTest(new SquaredChi(generator.ri, alpha));
+    setTest(new SmirnovTest(generator.ri, alpha));
   };
 
   return (
@@ -53,7 +53,7 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
             color="textSecondary"
             className={classes.section2}
           >
-            Chi-Cuadrada
+            Kolmogorov-Smirnov
           </Typography>
         </Grid>
         <Grid item sm={12} md={12}>
@@ -74,11 +74,13 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
             value={alpha}
             onChange={handleChange}
           >
+            <MenuItem value={0.2}>0.2</MenuItem>
             <MenuItem value={0.1}>0.1</MenuItem>
             <MenuItem value={0.05}>0.05</MenuItem>
-            <MenuItem value={0.025}>0.025</MenuItem>
+            <MenuItem value={0.02}>0.02</MenuItem>
             <MenuItem value={0.01}>0.01</MenuItem>
             <MenuItem value={0.005}>0.005</MenuItem>
+            <MenuItem value={0.002}>0.002</MenuItem>
             <MenuItem value={0.001}>0.001</MenuItem>
           </Select>
         </Grid>
@@ -87,4 +89,4 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   );
 };
 
-export default PassOrFail;
+export default Smirnov;

@@ -27,19 +27,14 @@ const Smirnov: React.FC<PassOrFailProps> = ({
   const classes = useStyles();
   const generator = new Multiplicative(multiplierA, modulus, seed, iterations);
   generator.generate();
-  console.log("SEEEEE", generator.seen);
-  const [alpha, setAlpha] = useState(0.1);
-  const [test, setTest] = useState(
-    new SmirnovTest(generator.seen, alpha).test()
-  );
 
-  const handleChange = useCallback(
-    (event: any) => {
-      setAlpha(event.target.value);
-      setTest(new SmirnovTest(generator.seen, alpha).test());
-    },
-    [setAlpha, setTest, alpha]
-  );
+  const [alpha, setAlpha] = useState(0.1);
+  const [test, setTest] = useState(new SmirnovTest(generator.ri, alpha));
+
+  const handleChange = (event: any) => {
+    setAlpha(event.target.value);
+    setTest(new SmirnovTest(generator.ri, alpha));
+  };
 
   return (
     <Card className={classes.cards}>
@@ -50,7 +45,7 @@ const Smirnov: React.FC<PassOrFailProps> = ({
             color="textSecondary"
             className={classes.section2}
           >
-            Chi-Cuadrada
+            Kolmogorov-Smirnov
           </Typography>
         </Grid>
         <Grid item sm={12} md={12}>
@@ -59,7 +54,7 @@ const Smirnov: React.FC<PassOrFailProps> = ({
             color="textSecondary"
             className={classes.section2}
           >
-            {test}
+            {test.test()}
           </Typography>
         </Grid>
 

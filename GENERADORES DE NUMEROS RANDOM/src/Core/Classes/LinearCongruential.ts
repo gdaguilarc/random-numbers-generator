@@ -40,13 +40,12 @@ class LinearCongruentialMethod
     while (counter < this.iterations) {
       counter++;
       answer = (this.multiplierA * answer + this.incrementC) % this.modulus;
-      ri.add(answer/this.modulus)
+      ri.add(answer / this.modulus);
       seen.add(answer);
     }
 
     this.seen = Array.from(seen);
     this.ri = Array.from(ri);
-    console.log(this.ri)
     return answer;
   }
 

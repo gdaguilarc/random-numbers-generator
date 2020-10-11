@@ -6,7 +6,7 @@ import AboutComponent from "./About";
 import InputComponent from "./Input";
 import HistoryList from "./History";
 import PassOrFail from "./Validation";
-import SquaredChi from "./SquaredChi";
+import Smirnov from "./Smirnov";
 
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -18,6 +18,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import MixedCongruentialMethod from "../../Core/Classes/MixedCongruential";
 
 import useStyles from "./MixedCongruentialStyles";
+import SquaredChi from "./SquaredChi";
 
 interface MixedCongruentialProps {
   history: History;
@@ -124,6 +125,16 @@ const MixedCongruential: React.FC<MixedCongruentialProps> = ({ history }) => {
                     modulus={modulus}
                     seed={seed}
                     iterations={iterations}
+                    incrementC={incrC}
+                  />
+                </Grid>{" "}
+                <Grid item xl={12} lg={12} md={12} sm={12}>
+                  <Smirnov
+                    multiplierA={multiA}
+                    modulus={modulus}
+                    seed={seed}
+                    iterations={iterations}
+                    incrementC={incrC}
                   />
                 </Grid>
               </Grid>

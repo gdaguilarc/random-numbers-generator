@@ -10,6 +10,7 @@ class MultiplicativeMethod
   seen: number[];
   multiplierA: number;
   modulus: number;
+  ri: number[];
 
   constructor(
     multiplierA: number,
@@ -19,12 +20,14 @@ class MultiplicativeMethod
   ) {
     super(seed, iterations);
     this.seen = [];
+    this.ri = [];
     this.multiplierA = multiplierA;
     this.modulus = modulus;
   }
 
   generate(): number {
     const seen: Set<number> = new Set();
+    const ri: Set<number> = new Set();
 
     let answer: number = this.seed;
     let counter: number = 0;
@@ -32,10 +35,12 @@ class MultiplicativeMethod
     while (counter < this.iterations) {
       counter++;
       answer = (this.multiplierA * answer) % this.modulus;
+      ri.add(answer / this.modulus);
       seen.add(answer);
     }
 
     this.seen = Array.from(seen);
+    this.ri = Array.from(ri);
     return answer;
   }
 
