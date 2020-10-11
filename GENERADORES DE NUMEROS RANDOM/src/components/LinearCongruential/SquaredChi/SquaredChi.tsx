@@ -8,14 +8,16 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 
 import useStyles from "./ValidationStyles";
-import Multiplicative from "../../../Core/Classes/Multiplicative";
 import SquaredChi from "../../../Core/Classes/SquaredChi";
+import LinearCongruentialMethod from "../../../Core/Classes/LinearCongruential";
+
 
 interface PassOrFailProps {
   multiplierA: number;
   modulus: number;
   seed: number;
   iterations: number;
+  incrementC: number
 }
 
 const PassOrFail: React.FC<PassOrFailProps> = ({
@@ -23,20 +25,19 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   modulus,
   seed,
   iterations,
+  incrementC,
 }) => {
   const classes = useStyles();
-  const generator = new Multiplicative(multiplierA, modulus, seed, iterations);
+  const generator = new LinearCongruentialMethod(multiplierA, incrementC, modulus, seed, iterations);
+  generator.generate()
 
   const [alpha, setAlpha] = useState(0.1);
-  const [test, setTest] = useState(new SquaredChi(generator.seen, alpha));
+  const [test, setTest] = useState(new SquaredChi(generator.ri, alpha));
 
-  const handleChange = useCallback(
-    (event: any) => {
-      setAlpha(event.target.value);
-      setTest(new SquaredChi(generator.seen, alpha));
-    },
-    [setAlpha, setTest, alpha]
-  );
+  const handleChange = ((event: any) => {
+    setAlpha(event.target.value);
+    setTest(new SquaredChi(generator.ri, alpha));
+  });
 
   return (
     <Card className={classes.cards}>
