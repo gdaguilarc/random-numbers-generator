@@ -9,7 +9,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 import useStyles from "./ValidationStyles";
 import Multiplicative from "../../../Core/Classes/Multiplicative";
-import SquaredChi from "../../../Core/Classes/SquaredChi";
+import SmirnovTest from "../../../Core/Classes/Smirnov";
 
 interface PassOrFailProps {
   multiplierA: number;
@@ -18,7 +18,7 @@ interface PassOrFailProps {
   iterations: number;
 }
 
-const PassOrFail: React.FC<PassOrFailProps> = ({
+const Smirnov: React.FC<PassOrFailProps> = ({
   multiplierA,
   modulus,
   seed,
@@ -27,16 +27,16 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   const classes = useStyles();
   const generator = new Multiplicative(multiplierA, modulus, seed, iterations);
   generator.generate();
-
+  console.log("SEEEEE", generator.seen);
   const [alpha, setAlpha] = useState(0.1);
   const [test, setTest] = useState(
-    new SquaredChi(generator.seen, alpha).test()
+    new SmirnovTest(generator.seen, alpha).test()
   );
 
   const handleChange = useCallback(
     (event: any) => {
       setAlpha(event.target.value);
-      setTest(new SquaredChi(generator.seen, alpha).test());
+      setTest(new SmirnovTest(generator.seen, alpha).test());
     },
     [setAlpha, setTest, alpha]
   );
@@ -71,11 +71,13 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
             value={alpha}
             onChange={handleChange}
           >
+            <MenuItem value={0.2}>0.2</MenuItem>
             <MenuItem value={0.1}>0.1</MenuItem>
             <MenuItem value={0.05}>0.05</MenuItem>
-            <MenuItem value={0.025}>0.025</MenuItem>
+            <MenuItem value={0.02}>0.02</MenuItem>
             <MenuItem value={0.01}>0.01</MenuItem>
             <MenuItem value={0.005}>0.005</MenuItem>
+            <MenuItem value={0.002}>0.002</MenuItem>
             <MenuItem value={0.001}>0.001</MenuItem>
           </Select>
         </Grid>
@@ -84,4 +86,4 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
   );
 };
 
-export default PassOrFail;
+export default Smirnov;

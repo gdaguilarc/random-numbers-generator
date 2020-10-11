@@ -17,6 +17,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import useStyles from "./MultiplicativeStyles";
 import SquaredChi from "./SquaredChi";
+import Smirnov from "./Smirnov";
 
 interface MultiplicativeScreenProps {
   history: History;
@@ -103,6 +104,14 @@ const Multiplicative: React.FC<MultiplicativeScreenProps> = ({ history }) => {
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12}>
                   <SquaredChi
+                    multiplierA={multiA}
+                    modulus={modulus}
+                    seed={seed}
+                    iterations={iterations}
+                  />
+                </Grid>
+                <Grid item xl={12} lg={12} md={12} sm={12}>
+                  <Smirnov
                     multiplierA={multiA}
                     modulus={modulus}
                     seed={seed}
