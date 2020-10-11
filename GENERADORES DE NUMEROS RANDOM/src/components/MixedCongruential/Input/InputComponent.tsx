@@ -3,7 +3,6 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 
@@ -83,7 +82,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
               variant="outlined"
               size="small"
               value={multiplierA}
-              onChange={(e) => handleMultiChange(e)}
+              onChange={handleMultiChange}
             />
           </Grid>
           <Grid item sm={6}>
@@ -116,25 +115,6 @@ const InputComponent: React.FC<InputComponentProps> = ({
               value={iterations}
               onChange={handleItersChange}
             />
-          </Grid>
-          <Grid item sm={12}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              style={{ color: "white" }}
-              onClick={() => {
-                recalculateRandNumber(
-                  multiplierA,
-                  incrementC,
-                  modulus,
-                  seed,
-                  iterations
-                );
-              }}
-            >
-              Generar
-            </Button>
           </Grid>
         </Grid>
       </Box>

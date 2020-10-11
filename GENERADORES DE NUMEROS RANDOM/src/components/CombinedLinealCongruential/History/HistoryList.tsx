@@ -27,7 +27,6 @@ const HistoryList: React.FC<HistoryListProps> = ({
   k,
 }) => {
   const classes = useStyles();
-
   let randomList: number[] = [];
   genList.forEach(
     (g: {
@@ -56,8 +55,9 @@ const HistoryList: React.FC<HistoryListProps> = ({
     k,
     genList[0].modulo - 1
   );
-  const rows = generator.history();
 
+  const rows = generator.history();
+  console.log(rows, "rows");
   return (
     <Card className={classes.cards}>
       <Grid container spacing={1}>

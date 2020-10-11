@@ -20,10 +20,10 @@ const HistoryRow: React.FC<HistoryRowProps> = ({
     <TableRow key={index + "-" + seed}>
       {generated || res ? (
         <>
-          <TableCell component="th" scope="row">
+          <TableCell component="th" scope="row" align="center">
             {index}
           </TableCell>
-          <TableCell component="th" scope="row">
+          <TableCell component="th" scope="row" align="center">
             {seed}
           </TableCell>
           <TableCell align="center">{generated}</TableCell>

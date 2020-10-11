@@ -48,7 +48,7 @@ const MidSquareScreen: React.FC<MidSquareScreenProps> = ({ history }) => {
   const [error, setError] = useState("");
   const [seed, setSeed] = useState(0);
   const [iterations, setIterations] = useState<number>(20);
-  const [rand, setRand] = useState<number>(3.21876);
+  const [rand, setRand] = useState<number>(0.0);
 
   const navBack = useCallback(() => {
     history.replace("/");
