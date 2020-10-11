@@ -1,7 +1,5 @@
 import FitTest from "./FitTest";
 import ISquaredChi from "../Interfaces/ISquaredChi";
-import { HistoryRow } from "../Interfaces/IHistory";
-import History from "./History";
 
 class SquaredChi
   extends FitTest
