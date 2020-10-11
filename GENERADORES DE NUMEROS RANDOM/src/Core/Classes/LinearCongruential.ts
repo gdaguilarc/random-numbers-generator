@@ -8,6 +8,7 @@ class LinearCongruentialMethod
   extends Generator
   implements ICongruential, RandomGenerator {
   seen: number[];
+  ri: number[];
   multiplierA: number;
   incrementC: number;
   modulus: number;
@@ -22,6 +23,7 @@ class LinearCongruentialMethod
   ) {
     super(seed, iterations);
     this.seen = [];
+    this.ri = [];
     this.multiplierA = multiplierA;
     this.incrementC = incrementC;
     this.modulus = modulus;
@@ -30,6 +32,7 @@ class LinearCongruentialMethod
 
   generate(): number {
     const seen: Set<number> = new Set();
+    const ri: Set<number> = new Set();
 
     let answer: number = this.seed;
     let counter: number = 0;
@@ -37,10 +40,13 @@ class LinearCongruentialMethod
     while (counter < this.iterations) {
       counter++;
       answer = (this.multiplierA * answer + this.incrementC) % this.modulus;
+      ri.add(answer/this.modulus)
       seen.add(answer);
     }
 
     this.seen = Array.from(seen);
+    this.ri = Array.from(ri);
+    console.log(this.ri)
     return answer;
   }
 

@@ -117,6 +117,7 @@ const LinearCongruential: React.FC<LinearCongruentialProps> = ({ history }) => {
                     modulus={modulus}
                     seed={seed}
                     iterations={iterations}
+                    incrementC={incrC}
                   />
                 </Grid>
               </Grid>
