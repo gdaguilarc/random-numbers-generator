@@ -29,17 +29,15 @@ const PassOrFail: React.FC<PassOrFailProps> = ({
 }) => {
   const classes = useStyles();
   const generator = new LinearCongruentialMethod(multiplierA, incrementC, modulus, seed, iterations);
+  generator.generate()
 
   const [alpha, setAlpha] = useState(0.1);
   const [test, setTest] = useState(new SquaredChi(generator.ri, alpha));
 
-  const handleChange = useCallback(
-    (event: any) => {
-      setAlpha(event.target.value);
-      setTest(new SquaredChi(generator.ri, alpha));
-    },
-    [setAlpha, setTest, alpha]
-  );
+  const handleChange = ((event: any) => {
+    setAlpha(event.target.value);
+    setTest(new SquaredChi(generator.ri, alpha));
+  });
 
   return (
     <Card className={classes.cards}>
