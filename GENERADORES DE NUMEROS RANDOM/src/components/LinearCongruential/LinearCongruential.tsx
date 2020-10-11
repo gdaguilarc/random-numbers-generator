@@ -7,6 +7,7 @@ import LinearCongruentialMethod from "../../Core/Classes/LinearCongruential";
 import AboutComponent from "./About";
 import InputComponent from "./Input";
 import HistoryList from "./History";
+import SquaredChi from "./SquaredChi";
 
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -108,6 +109,14 @@ const LinearCongruential: React.FC<LinearCongruentialProps> = ({ history }) => {
                     handleItersChange={handleItersChange}
                     recalculateRandNumber={recalculateRandNumber}
                     error={error}
+                  />
+                </Grid>
+                <Grid item xl={12} lg={12} md={12} sm={12}>
+                  <SquaredChi
+                    multiplierA={multiA}
+                    modulus={modulus}
+                    seed={seed}
+                    iterations={iterations}
                   />
                 </Grid>
               </Grid>

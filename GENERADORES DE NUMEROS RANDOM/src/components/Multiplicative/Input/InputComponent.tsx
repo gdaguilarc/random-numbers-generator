@@ -102,20 +102,6 @@ const InputComponent: React.FC<InputComponentProps> = ({
               onChange={handleItersChange}
             />
           </Grid>
-
-          <Grid item sm={12}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              style={{ color: "white" }}
-              onClick={() => {
-                recalculateRandNumber(multiplierA, modulus, seed, iterations);
-              }}
-            >
-              Generar
-            </Button>
-          </Grid>
         </Grid>
       </Box>
     </Card>

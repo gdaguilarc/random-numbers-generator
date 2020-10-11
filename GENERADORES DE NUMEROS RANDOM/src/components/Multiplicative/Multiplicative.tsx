@@ -4,8 +4,8 @@ import { History } from "history";
 
 import AboutComponent from "./About";
 import InputComponent from "./Input";
-import MultiplicativeMethod from "../../Core/Classes/Multiplicative";
 import HistoryList from "./History";
+import MultiplicativeMethod from "../../Core/Classes/Multiplicative";
 
 // DESIGN
 import IconButton from "@material-ui/core/IconButton";
@@ -16,6 +16,7 @@ import Grid from "@material-ui/core/Grid";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import useStyles from "./MultiplicativeStyles";
+import SquaredChi from "./SquaredChi";
 
 interface MultiplicativeScreenProps {
   history: History;
@@ -98,6 +99,14 @@ const Multiplicative: React.FC<MultiplicativeScreenProps> = ({ history }) => {
                     handleItersChange={handleItersChange}
                     recalculateRandNumber={recalculateRandNumber}
                     error={error}
+                  />
+                </Grid>
+                <Grid item xl={12} lg={12} md={12} sm={12}>
+                  <SquaredChi
+                    multiplierA={multiA}
+                    modulus={modulus}
+                    seed={seed}
+                    iterations={iterations}
                   />
                 </Grid>
               </Grid>
