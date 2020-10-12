@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Divider from "@material-ui/core/Divider";
+import Avatar from '@material-ui/core/Avatar';
 
 import useStyles from "./HomePageStyles";
 
@@ -149,6 +150,56 @@ const HomePage: React.FC<HomePageProps> = ({ history }) => {
                 </Card>
               </CardActionArea>
             </Grid>
+              {/* Medtodo Congruencial Lineal Combinado */}
+            <Grid item xl={4} lg={4} md={6} sm={12}>
+              <CardActionArea>
+                <Card className={classes.darkcard}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <Typography
+                        variant="subtitle1"
+                        align="justify"
+                        className={classes.section2}
+                      >
+                        Alejandro Moreno Loza
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        align="justify"
+                        className={classes.section2}
+                      >
+                       Uri Goldberg Kleiman  
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        align="justify"
+                        className={classes.section2}
+                      >
+                        Luis Miguel Maawad Hinojosa    
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Typography
+                        variant="subtitle1"
+                        align="justify"
+                        className={classes.section2}
+                      >
+                        Guillermo David Aguilar Castilleja
+                      </Typography>
+                        <Typography
+                        variant="subtitle1"
+                        align="justify"
+                        className={classes.section2}
+                      >
+                        Andrea Beatríz Becerra Bolaños
+                      </Typography>
+                    </Grid>
+                    
+                  </Grid>
+                </Card>
+              </CardActionArea>
+            </Grid>
+            
           </Grid>
         </Box>
       </Container>

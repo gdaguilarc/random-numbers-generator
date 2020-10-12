@@ -20,11 +20,19 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: "0.3px",
       boxShadow: "7px 7px rgba(155, 167, 192, .8)",
       border: "3px solid #8b96ac",
-      minHeight: "150px",
+      minHeight: "180px",
       maxHeight: "500px",
     },
     darkcard: {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: ' #8b96ac',
+      padding: theme.spacing(4),
+      borderRadius: "0.3px",
+      boxShadow: "7px 7px rgba(155, 167, 192, .8)",
+      // border: "3px solid #8b96ac",
+      minHeight: "180px",
+      maxHeight: "500px",
+      color: theme.palette.primary.light,
+
     },
     header: {
       fontWeight: "bold",
