@@ -29,7 +29,7 @@ const SquaeedChi: React.FC<PassOrFailProps> = ({
   generator.generate();
 
   const [alpha, setAlpha] = useState(0.1);
-  const test = new SquaredChi(generator.seen, alpha);
+  const test = new SquaredChi(generator.ri, alpha);
 
   const handleChange = useCallback(
     (event: any) => {

@@ -81,6 +81,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
               <TableCell>K</TableCell>
               <TableCell>Suma Generadores</TableCell>
               <TableCell>Numero Random</TableCell>
+              <TableCell>Ri</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -88,6 +89,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
               <HistoryRow
                 seed={row.seed}
                 generated={row.generated}
+                squared={row.squared}
                 res={row.res}
               />
             ))}

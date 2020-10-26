@@ -67,27 +67,36 @@ class SquaredChi extends FitTest implements ISquaredChi {
     } else {
       return "Alfa inválida";
     }
+
     this.seen.sort(function (a, b) {
       return a - b;
     });
+
     var len: number = this.seen.length;
-    var range: number = this.seen[len - 1];
-    var k: number = Math.floor(1 + 3.322 * Math.log(len));
+    var range: number = 1;
+    var k: number = Math.floor(1 + (3.322 * Math.log10(len)));
     var classRange: number = range / k;
 
     var seenClasses: number[][] = [];
     var seenClass: number[] = [];
     var counter: number = 1;
+    let classCutoffs: number [] = [];
 
     // Divides seen into the class ranges
     for (var i: number = 0; i < len; i++) {
-      if (this.seen[i] <= classRange * counter) seenClass.push(this.seen[i]);
+      if (this.seen[i] <= classRange * counter){
+        seenClass.push(this.seen[i]);
+      }
       else {
         seenClasses.push(seenClass);
+        classCutoffs.push(classRange * counter);
         counter++;
         seenClass = [this.seen[i]];
       }
     }
+    seenClasses.push(seenClass);
+    classCutoffs.push(classRange * counter);
+
     var up: number[];
     var down: number[];
     var madeChange: boolean = true;
@@ -101,9 +110,9 @@ class SquaredChi extends FitTest implements ISquaredChi {
           var newSeenClasses: number[][];
           // Dont look up:
           if (i == 0) {
-            newSeenClasses = seenClasses.slice(0, i);
+            newSeenClasses = [];
             newSeenClasses.push(seenClasses[i].concat(seenClasses[i + 1]));
-            newSeenClasses.concat(seenClasses.slice(i + 2, seenClasses.length));
+            newSeenClasses = newSeenClasses.concat(seenClasses.slice(2, seenClasses.length));
             seenClasses = newSeenClasses;
             break;
           }
@@ -111,7 +120,6 @@ class SquaredChi extends FitTest implements ISquaredChi {
           else if (i == seenClasses.length - 1) {
             newSeenClasses = seenClasses.slice(0, i - 1);
             newSeenClasses.push(seenClasses[i - 1].concat(seenClasses[i]));
-            newSeenClasses.concat(seenClasses.slice(i + 1, seenClasses.length));
             seenClasses = newSeenClasses;
             break;
           }
@@ -122,7 +130,7 @@ class SquaredChi extends FitTest implements ISquaredChi {
             if (up.length >= down.length) {
               newSeenClasses = seenClasses.slice(0, i);
               newSeenClasses.push(seenClasses[i].concat(seenClasses[i + 1]));
-              newSeenClasses.concat(
+              newSeenClasses = newSeenClasses.concat(
                 seenClasses.slice(i + 2, seenClasses.length)
               );
               seenClasses = newSeenClasses;
@@ -130,7 +138,7 @@ class SquaredChi extends FitTest implements ISquaredChi {
             } else {
               newSeenClasses = seenClasses.slice(0, i - 1);
               newSeenClasses.push(seenClasses[i - 1].concat(seenClasses[i]));
-              newSeenClasses.concat(
+              newSeenClasses = newSeenClasses.concat(
                 seenClasses.slice(i + 1, seenClasses.length)
               );
               seenClasses = newSeenClasses;
@@ -141,31 +149,36 @@ class SquaredChi extends FitTest implements ISquaredChi {
       }
     }
 
-    counter = 1;
+    counter = 0;
     var newClassCutoffs: number[] = [];
     for (var i: number = 0; i < seenClasses.length; i++) {
       seenClass = seenClasses[i];
-      while (seenClass[seenClass.length - 1] > counter * classRange) {
+      while (seenClass[seenClass.length - 1] > classCutoffs[counter]) {
         counter++;
       }
-      newClassCutoffs.push(counter * classRange);
+      newClassCutoffs.push(classCutoffs[counter]);
       counter++;
     }
 
-    var FOi: number[] = [];
-    var FEi: number[] = [];
+    var FOi: number;
+    var FEi: number;
     var squared: number[] = [];
     for (var i: number = 0; i < seenClasses.length; i++) {
-      FOi.push(seenClasses[i].length);
+      FOi = seenClasses[i].length;
       if (i == 0) {
-        FEi.push(len * newClassCutoffs[i]);
+        FEi = len * newClassCutoffs[i];
       } else {
-        FEi.push(len * (newClassCutoffs[i] - newClassCutoffs[i - 1]));
+        FEi = len * (newClassCutoffs[i] - newClassCutoffs[i - 1]);
       }
-      squared.push((FOi[i] - FEi[i]) ** 2 / FEi[i]);
+      squared.push(Math.pow((FOi - FEi), 2) / FEi);
     }
+
+    let newK = seenClasses.length;
+    var Xva: number;
+
     var X0: number = squared.reduce((a, b) => a + b, 0);
-    var Xva: number = this.table[newClassCutoffs.length][alphaIndex];
+    if(newK === 0) Xva = this.table[0][alphaIndex];
+    else Xva = this.table[newK - 1][alphaIndex];
     if (X0 < Xva) {
       return (
         "X0 = " +
